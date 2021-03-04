@@ -1,0 +1,138 @@
+*{
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+.blog-content{
+    width: 100%;
+    position: relative;
+}
+.blog-siderbar{
+    width: 248px;
+    height: 100vh;
+    position: fixed;
+    overflow: scroll;
+    overflow-y: hidden;
+    overflow-x: hidden;
+    top: 0px;
+    left: 20px;
+    background-color: rgb(238, 238, 238);
+}
+.blog-siderbar:hover{
+    overflow-y: visible;
+    scroll-behavior: smooth;
+}
+.blog-siderbar ul{
+    margin-top: 100px;
+    padding-bottom: 15px;
+    list-style: none;
+}
+.blog-siderbar ul li{
+    height: 40px;
+    line-height: 35px;
+    padding-left: 10px;
+    font-size: larger;
+}
+.blog-siderbar ul li:hover{
+    cursor: pointer;
+    color: rgb(23, 129, 228);
+    background-color: rgb(236, 236, 236);
+    box-shadow: 1px 1px 5px 0px #5c5eeb;
+    border-radius: 6px;
+}
+
+/* hết phần siderbar */
+
+.blog-lists{
+    margin: 50px 0px 60px 300px;
+}
+.blog-prominences{
+    width: 100%;
+    display: flex;
+    margin-bottom: 70px;
+    position: relative;
+}
+.blog-prominences .tooltiptext {
+    visibility: hidden;
+    width: 120px;
+    color: rgb(224, 112, 59);
+    text-align: center;
+    font-size: 16px;
+    padding: 5px 0;
+    position: absolute;
+    z-index: 1;
+    top: -5px;
+    left: 72%;
+}
+
+.blog-prominences .tooltiptext::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border: 5px solid;
+    border-color: rgb(224, 112, 59) transparent transparent transparent;
+    }
+  
+.blog-prominences:hover .tooltiptext {
+    visibility: visible;
+}
+
+
+.blog-prominences-image{
+    width: 550px;
+    height: auto;
+}
+.blog-prominences-title{
+    width: 45%;
+    padding: 30px;
+    font-size: 20px;
+    background-color: rgb(234, 235, 233);
+}
+.blog-prominences-title h4{
+    font-size: 25px;
+    height: 80px;
+    overflow: hidden;
+}
+.blog-prominences-title h4:hover{
+    cursor: pointer;
+    color: rgb(22, 22, 236);
+}
+.blog-prominences-title p{
+    margin-top: 20px;
+    height: 130px;
+    overflow: hidden;
+}
+
+
+
+
+.lists-blog h4{
+    height: 40px;
+    overflow: hidden;
+    font-size: 20px;
+}
+.lists-blog h4:hover{
+    cursor: pointer;
+    color: rgb(22, 22, 236);
+}
+.blog-child{
+    width: 100%;
+    display: flex;
+    margin-bottom: 30px;
+}
+.blog-child-image{
+    width: 250px;
+    height: auto;
+}
+.blog-child-title{
+    width: 75%;
+    font-size: 18px;
+    background-color: rgb(234, 235, 233);
+}
+.blog-child-title p{
+    height: 130px;
+    padding: 10px;
+    overflow: hidden;
+}

@@ -26,11 +26,6 @@ function Login(props) {
         setVisibleModalSignUp(false)
     }
     const handleOkSignUp = () => {
-        setLoadModalSignUp(true);
-        setTimeout(() => {
-            setVisibleModalSignUp(false)
-            setLoadModalSignUp(false);
-        }, 3000);
         axios({
             method: "POST",
             url: "/user/signup",
@@ -41,6 +36,11 @@ function Login(props) {
             }
         })
             .then((res) => {
+                setLoadModalSignUp(true);
+                setTimeout(() => {
+                    setVisibleModalSignUp(false)
+                    setLoadModalSignUp(false);
+                }, 3000);
                 alert(res.data.message)
             })
             .catch((err) => {

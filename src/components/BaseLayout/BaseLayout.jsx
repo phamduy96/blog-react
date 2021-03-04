@@ -3,7 +3,7 @@ import { Layout, Menu, Drawer, Row, Col } from 'antd';
 import { MenuOutlined, LogoutOutlined } from '@ant-design/icons';
 import 'antd/dist/antd.css';
 import "../BaseLayout/BaseLayout.css"
-import logoHeader from "../../vendor/img/nodejsLogo.png"
+import logoHeader from "../../vendor/img/logo2Baselayout.png"
 import axios from 'axios';
 import { useHistory } from "react-router-dom"
 import Cookies from "js-cookie"
@@ -33,12 +33,16 @@ function BaseLayout(props) {
   )
   return (
     <Layout className="layout">
-      <Header>
+      <Header className="header">
         {drawer}
         <span><img className="logo-header" src={logoHeader} alt="" /></span>
         <Menu theme="dark" mode="horizontal" defaultSelectedKeys={['2']} className="baselayout-header">
           <Menu.Item key="1"></Menu.Item>
-          <Menu.Item key="2" onClick={showDrawer} className="baselayout-header-response"><MenuOutlined /></Menu.Item>
+          <Menu.Item key="2">NEWS</Menu.Item>
+          <Menu.Item key="3">WORLD</Menu.Item>
+          <Menu.Item key="4">SPORTS</Menu.Item>
+          <Menu.Item key="5"></Menu.Item>
+          <Menu.Item key="6" onClick={showDrawer} className="baselayout-header-response"><MenuOutlined /></Menu.Item>
         </Menu>
         <button className="baselayout-header-logout" onClick={()=>{
           axios({
@@ -50,11 +54,11 @@ function BaseLayout(props) {
             Cookies.remove("token")
             history.push("/login")
           })
-        }}>Đăng Xuất</button>
+        }}><LogoutOutlined style={{fontSize: "22px", marginRight: "10px"}}></LogoutOutlined>Đăng Xuất</button>
       </Header>
       <Content className="site-layout-background ant-layout-content">
         <Row justify="center content">
-          <Col xs={props.xs ? props.xs : 23} sm={props.sm ? props.sm : 23}
+          <Col xs={props.xs ? props.xs : 23} sm={props.sm ? props.sm : 23} 
             style={{ padding: "0 0" }}>
             <div className="site-layout-content">
               {

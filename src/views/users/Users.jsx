@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from "../../config/axios/axios";
 import BaseLayout from "../../components/BaseLayout/BaseLayout"
 import "./Users.css"
@@ -34,7 +34,6 @@ function Users(props) {
                 alert(err.response.data.message);
             })
     }, [overview])
-
 
     const columns = [
         {
@@ -124,6 +123,7 @@ function Users(props) {
             />
         </Modal>
     )
+    console.log(data);
     return (
         <BaseLayout>
             {modalUser}
@@ -135,7 +135,7 @@ function Users(props) {
                     if (data) {
                         if (dataSearch) {
                             let dataFiter = data.filter((item) => {
-                                return item.username === dataSearch || item.email === dataSearch
+                                return item.username.includes(dataSearch) || item.email.includes(dataSearch)
                             });
                             setData(dataFiter)
                         }
@@ -146,7 +146,6 @@ function Users(props) {
             <div className="users">
                 <Table
                     columns={columns}
-                    pagination={{total: "10", current: 1}}
                     dataSource={data}
                 />
             </div>
