@@ -46,6 +46,14 @@
 .blog-lists{
     margin: 50px 0px 60px 300px;
 }
+.blog-menusiderbar{
+    display: block;
+    font-size: 28px;
+    position: -webkit-sticky;
+    position: sticky;
+    top: 50px;
+    left: 0px;
+}
 .blog-prominences{
     width: 100%;
     display: flex;
@@ -105,9 +113,6 @@
     overflow: hidden;
 }
 
-
-
-
 .lists-blog h4{
     height: 40px;
     overflow: hidden;
@@ -135,4 +140,104 @@
     height: 130px;
     padding: 10px;
     overflow: hidden;
+}
+
+/* responsive */
+
+@media screen and (max-width: 1024px){
+    .blog-siderbar{
+        width: 220px;
+    }
+    .blog-lists{
+        margin: 50px 0px 60px 250px;
+    }
+    .blog-prominences-image{
+        width: 420px;
+    }
+    .blog-prominences-title{
+        width: 45%;
+        padding: 20px;
+        font-size: 19px;
+    }
+    .blog-prominences-title h4{
+        font-size: 22px;
+        height: 65px;
+    }
+    .blog-prominences-title p{
+        margin-top: 20px;
+        height: 120px;
+        overflow: hidden;
+    }
+}
+@media screen and (max-width: 768px){
+    .blog-siderbar{
+        width: 210px;
+    }
+    .blog-lists{
+        margin: 50px 0px 60px 240px;
+    }
+    .blog-prominences{
+        margin-bottom: 40px;
+    }
+    .blog-prominences-image{
+        width: 320px;
+    }
+    .blog-prominences-title{
+        width: 34%;
+        padding: 30px 10px 0px 15px;
+    }
+    .blog-prominences-title h4{
+        font-size: 18px;
+        height: 120px;
+    }
+    .blog-prominences-title p{
+        display: none;
+    }
+    .blog-child-image{
+        width: 210px;
+    }
+    .blog-child-title{
+        width: 56%;
+        font-size: 17px;
+    }
+    .blog-child-title p{
+        height: 110px;
+        padding: 10px;
+        overflow: hidden;
+    }
+}
+@media screen and (max-width: 576px){
+    .blog-siderbar{
+        transform: translateX(-100%);
+    }
+    .blog-lists{
+        margin: 50px 0px 60px 50px;
+    }
+    .blog-prominences-image{
+        width: 320px;
+        height: auto;
+    }
+    .blog-prominences-title{
+        width: 34%;
+        padding: 30px 10px 0px 15px;
+    }
+    .blog-prominences-title h4{
+        font-size: 18px;
+        height: 120px;
+    }
+    .blog-prominences-title p{
+        display: none;
+    }
+    .blog-child-image{
+        width: 210px;
+    }
+    .blog-child-title{
+        width: 56%;
+        font-size: 17px;
+    }
+    .blog-child-title p{
+        height: 110px;
+        padding: 10px;
+        overflow: hidden;
+    }
 }

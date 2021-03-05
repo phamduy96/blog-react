@@ -30,6 +30,7 @@
     color: rgb(82, 82, 231);
 }
 .baselayout-header-response{
+    margin-left: 20px;
     cursor: pointer;
     display: none !important;
     color: black;
@@ -39,6 +40,19 @@
     color: black;
     font-size: 25px;
 }
+.baselayout-drawer{
+    font-size: 16px;
+}
+.baselayout-drawer p:hover{
+    color: white;
+    background-color: rgb(161, 161, 161);
+}
+.baselayout-drawerlogout svg{
+    font-size: 20px;
+    margin-top: 2px;
+    margin-right: 10px;
+}
+
 .ant-menu.ant-menu-dark{
     display: inline-block;
     background-color: #fff;
@@ -57,7 +71,7 @@
     background-color: rgb(235, 217, 235);
 }
 .ant-layout-content{
-    height: 700px;
+    width: 100% !important;
     margin-top: 65px;
     background-color: #fff;
 }
@@ -71,8 +85,36 @@
     bottom: 0;
 }
 
-@media screen and (max-width: 480px){
+@media screen and (max-width: 768px){
+    .ant-layout-content{
+        width: 100% !important;
+        margin-top: 65px;
+        background-color: #fff;
+    }
+    .ant-menu-dark.ant-menu-horizontal > .ant-menu-item{
+        padding: 0;
+        width: 70px;
+        text-align: center !important;
+    }
+}
+@media screen and (max-width: 576px){
+    .ant-menu-dark.ant-menu-horizontal > .ant-menu-item{
+        display: none !important;
+    }
     .baselayout-header-response{
         display: inline-block !important;
+    }
+}
+@media screen and (max-width: 375px){
+    .baselayout-header-logout{
+        display: none;
+    }
+    .baselayout-header-response{
+        margin-left: 120px;
+    }
+}
+@media screen and (max-width: 320px){
+    .baselayout-header-response{
+        margin-left: 80px;
     }
 }

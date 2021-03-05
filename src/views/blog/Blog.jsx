@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Image } from 'antd';
 import {
     GlobalOutlined, VideoCameraOutlined, QuestionCircleOutlined,
-    StrikethroughOutlined, CustomerServiceOutlined
+    StrikethroughOutlined, CustomerServiceOutlined, MenuUnfoldOutlined
 } from '@ant-design/icons';
 import axios from "../../config/axios/axios"
 import BaseLayout from "../../components/BaseLayout/BaseLayout"
@@ -24,6 +24,8 @@ function Blog(props) {
     }, [overView])
 
     const listBlog = dataBlog.slice(1, dataBlog.length)
+
+
     return (
         <BaseLayout>
             <div className="blog-content">
@@ -48,6 +50,7 @@ function Blog(props) {
                     </ul>
                 </div>
                 <div className="blog-lists">
+                    <MenuUnfoldOutlined className="blog-menusiderbar"></MenuUnfoldOutlined>
                     {dataBlog.length ? <div className="blog-prominences">
                                     <span className="tooltiptext">Click here</span>
                                     <Image className="blog-prominences-image"

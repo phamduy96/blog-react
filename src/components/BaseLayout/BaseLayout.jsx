@@ -25,10 +25,12 @@ function BaseLayout(props) {
       closable={false}
       onClose={onClose}
       visible={visibleDrawer}
+      className="baselayout-drawer"
     >
       <p>Some contents...</p>
       <p>Some contents...</p>
       <p>Some contents...</p>
+      <p className="baselayout-drawerlogout"><LogoutOutlined></LogoutOutlined> Đăng Xuất</p>
     </Drawer>
   )
   return (
@@ -41,9 +43,8 @@ function BaseLayout(props) {
           <Menu.Item key="2">NEWS</Menu.Item>
           <Menu.Item key="3">WORLD</Menu.Item>
           <Menu.Item key="4">SPORTS</Menu.Item>
-          <Menu.Item key="5"></Menu.Item>
-          <Menu.Item key="6" onClick={showDrawer} className="baselayout-header-response"><MenuOutlined /></Menu.Item>
         </Menu>
+        <span onClick={showDrawer} className="baselayout-header-response"><MenuOutlined /></span>
         <button className="baselayout-header-logout" onClick={()=>{
           axios({
             method: "POST",
@@ -58,7 +59,7 @@ function BaseLayout(props) {
       </Header>
       <Content className="site-layout-background ant-layout-content">
         <Row justify="center content">
-          <Col xs={props.xs ? props.xs : 23} sm={props.sm ? props.sm : 23} 
+          <Col xs={props.xs ? props.xs : 23} sm={props.sm ? props.sm : 23}    
             style={{ padding: "0 0" }}>
             <div className="site-layout-content">
               {
