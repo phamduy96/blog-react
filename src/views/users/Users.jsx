@@ -21,7 +21,6 @@ function Users(props) {
             .then((result) => {
                 let dataChange = result.data.data.map((item, index) => {
                     let source = {
-                        avatar: <Avatar src={<Image src={`${item.avatar}`}></Image>}></Avatar>,
                         avatar: item.avatar.length === 1 ? <Avatar>{item.avatar}</Avatar> :
                             <Avatar src={<Image src={`${item.avatar}`}></Image>}></Avatar>,
                         key: index
