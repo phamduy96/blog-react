@@ -1,0 +1,39 @@
+.container{
+    width: 80%;
+    margin: 0 auto;
+    background-color: #fcfaf6;
+}
+.content{
+    background-color: #fcfaf6;
+}
+.icon-fix svg{
+    width: 25px;
+    height: 25px;
+    color: #93908a;
+}
+
+.backTop svg{
+    height: 30px;
+    width: 30px;
+    line-height: '40px';
+    color: '#93908a';
+    text-align: 'center';
+    font-size: 14;
+}
+.backTop{
+    border: 1px solid #93908a;
+    padding: 4px;
+}
+.avatar img{
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    overflow: hidden;
+}
+@media screen and (max-width: 576px){
+    .container{
+        width: 95%;
+        margin: 0 auto;
+        background-color: #fcfaf6;
+    }
+}
