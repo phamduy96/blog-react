@@ -46,3 +46,10 @@
 .ant-modal-footer span{
     font-size: 15px;
 }
+.users{
+    width: 100% !important;
+}
+.users-table{
+    display: block;
+    width: 100%;
+}

@@ -1,6 +1,6 @@
 import { combineReducers } from "redux"
-import hobbyReducers from "./hobbys"
+import idBlogReducers from "./IDBlog"
 const rootReducer = combineReducers({
-    hobby: hobbyReducers
+    idBlogReducers: idBlogReducers
 })
 export default rootReducer

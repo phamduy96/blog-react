@@ -145,8 +145,13 @@ function Login(props) {
                                     }
                                 })
                                     .then((res) => {
-                                        Cookies.set('token', res.data.data, { expires: 7 });
-                                        history.push("/user")
+                                        localStorage.setItem("user", JSON.stringify(res.data.user))
+                                        Cookies.set('token', res.data.token, { expires: 7 });
+                                        if(res.data.user.avatar){
+                                            history.push("/blog")
+                                        }else{
+                                            history.push("/updateAvarta")
+                                        }
                                     })
                                     .catch((err) => {
                                         alert(err.response.data.message)
@@ -155,7 +160,7 @@ function Login(props) {
                                 Đăng Nhập
                             </Button>
                         </Form.Item>
-                        <div className="login-forgot-password"><a href="https://www.google.com/">Quên mật khẩu ?</a></div>
+                        <div className="login-forgot-password"><a href="#">Quên mật khẩu ?</a></div>
                         <hr style={{ margin: "15px 0" }} />
                         <Form.Item >
                             <Button style={{ backgroundColor: " rgb(62, 238, 62)", border: "none" }}

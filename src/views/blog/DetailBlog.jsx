@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import BaseLayout from "../../components/BaseLayout/BaseLayout";
-
 import axios from "../../config/axios/axios"
+import {useSelector} from "react-redux"
 import "../blog/DetailBlog.css"
 import { Col, Row , Image, Input, BackTop, Affix } from 'antd';
 import {
@@ -10,25 +10,23 @@ import {
 import { useHistory } from 'react-router-dom';
 
 function DetailBlog(props) {
+    let [dataBlog, setDataBlog] = useState('')
+    let idBlog = window.location.href.split('http://localhost:3000/detailBlog/')[1]
     let history = useHistory()
-    let [overView, setOverView] = useState(false)
-    let [dataBlog, setDataBlog] = useState("")
     const IconFont = createFromIconfontCN({
         scriptUrl: '//at.alicdn.com/t/font_8d5l8fzk5b87iudi.js',
       });
     useEffect(()=> {
         axios({
-            method: "GET",
-            url: "/blog"
+            method: 'GET',
+            url: `/detail-blog/${idBlog}`
+        }).then((data) => {
+            setDataBlog(data.data.data)
+        }).catch((err) => {
+            console.log(err)
         })
-            .then((res) => {
-                setDataBlog(res.data.data)
-            })
-            .catch((err) => {
-                console.log(err);
-            })
-    },[overView])
-    const listBlog = dataBlog.slice(1, dataBlog.length)
+    }, [])
+    console.log()
     return (
         <BaseLayout>
             <div  style={{paddingBottom: "20px"}}>
@@ -44,24 +42,22 @@ function DetailBlog(props) {
                         </div>
                     
                         </Affix >
-                            <div style={{background: "#fcfaf6"}}>
+                            { <div style={{background: "#fcfaf6"}}>
                                 <div className="container" style={{padding: "25px"}}>
-                                    { listBlog.length ? <div>
-                                        <h1 style={{paddingBottom: "20px"}}> {dataBlog.length ? dataBlog[0].title : null} </h1>
+                                        <h1 style={{paddingBottom: "20px"}}> {dataBlog.title}  </h1>
                                         <div style={{textAlign: "center", paddingBottom: "20px"}}>
-                                            <Image style={{width: "100%"}} className="blog-prominences-image"
-                                                src= {dataBlog.length ? dataBlog[0].image : null}
+                                            <Image style={{width: "100%", height: '100%'}} 
+                                                src= {dataBlog.image}
                                             >
                                             </Image>
 
                                         </div>
-                                        <h3> {dataBlog.length ? dataBlog[0].content : null}  </h3>
+                                        <h3> {dataBlog.content}   </h3>
 
-                                    </div> : null
 
-                                    }
                                 </div>
                             </div>
+                            }
                             < hr style={{height: "3px"}}/>
                             <div style={{paddingBottom: "30px"}}>
                                 <div className="container">
@@ -119,10 +115,7 @@ function DetailBlog(props) {
 
                 </Row>
             </div>
-         
-
-
-        </BaseLayout>
+         </BaseLayout>
     );
 }
 
