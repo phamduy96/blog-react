@@ -2,14 +2,20 @@ import React, { useEffect, useState } from 'react';
 import { Image } from 'antd';
 import {
     GlobalOutlined, VideoCameraOutlined, QuestionCircleOutlined,
-    StrikethroughOutlined, CustomerServiceOutlined, MenuUnfoldOutlined
+    StrikethroughOutlined, CustomerServiceOutlined, CaretRightOutlined
 } from '@ant-design/icons';
+import {useDispatch, useSelector} from "react-redux"
+import actions from "../../redux/actions/IDBlog"
 import axios from "../../config/axios/axios"
 import BaseLayout from "../../components/BaseLayout/BaseLayout"
 import "./Blog.css"
+import { useHistory } from 'react-router-dom';
 function Blog(props) {
+    let history = useHistory()
     let [overView, setOverView] = useState(false)
     let [dataBlog, setDataBlog] = useState("")
+    let [showSiderBar, setShowSiderBar] = useState("")
+    let dispatch = useDispatch();
     useEffect(() => {
         axios({
             method: "GET",
@@ -24,12 +30,10 @@ function Blog(props) {
     }, [overView])
 
     const listBlog = dataBlog.slice(1, dataBlog.length)
-
-
     return (
         <BaseLayout>
             <div className="blog-content">
-                <div className="blog-siderbar">
+                <div style={showSiderBar ? showSiderBar : {}} className="blog-siderbar">
                     <ul>
                         <li><GlobalOutlined style={{ fontSize: "22px", color: "blue", marginRight: "10px" }}></GlobalOutlined> THời sự</li>
                         <li><GlobalOutlined style={{ fontSize: "22px", color: "blue", marginRight: "10px" }}></GlobalOutlined> Thế giới</li>
@@ -49,8 +53,15 @@ function Blog(props) {
                         <li><GlobalOutlined style={{ fontSize: "22px", color: "blue", marginRight: "10px" }}></GlobalOutlined> Diễn đàn</li>
                     </ul>
                 </div>
-                <div className="blog-lists">
-                    <MenuUnfoldOutlined className="blog-menusiderbar"></MenuUnfoldOutlined>
+                <div className="blog-lists"  onClick={()=>{
+                        showSiderBar ? setShowSiderBar(false) : setOverView(false);
+                    }}>
+                    <CaretRightOutlined className="blog-menusiderbar" onClick={()=>{
+                        setShowSiderBar({
+                            transform: "translateX(0)",
+                            zIndex: "10"
+                        })
+                    }}></CaretRightOutlined>
                     {dataBlog.length ? <div className="blog-prominences">
                                     <span className="tooltiptext">Click here</span>
                                     <Image className="blog-prominences-image"
@@ -58,7 +69,10 @@ function Blog(props) {
                                     >
                                     </Image>
                                     <div className="blog-prominences-title">
-                                        <h4>{dataBlog.length ? dataBlog[0].title : null}</h4>
+                                        <h4 onClick={()=>{
+                                            history.push(`/detailBlog/${dataBlog[0]._id}`)
+                                            dispatch(actions.IDBlog({idBlog: dataBlog[0]._id}))
+                                        }}>{dataBlog.length ? dataBlog[0].title : null}</h4>
                                         <p>{dataBlog.length ? dataBlog[0].content: null}</p>
                                     </div>
                                 </div> : null
@@ -68,7 +82,10 @@ function Blog(props) {
                         dataBlog.length ? listBlog.map((item, index) => {
                             return (
                                 <div className="lists-blog" key={index}>
-                                        <h4>{item.title}</h4>
+                                        <h4 onClick={()=>{
+                                            history.push(`/detailBlog/${item._id}`)
+                                            dispatch(actions.IDBlog({idBlog: item._id}))
+                                        }}>{item.title}</h4>
                                         <div className="blog-child">
                                             <Image className="blog-child-image"
                                                 src= {item.image}

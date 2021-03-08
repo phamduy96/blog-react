@@ -4,7 +4,6 @@ import BaseLayout from "../../components/BaseLayout/BaseLayout"
 import "./Users.css"
 import { Table, Space, Avatar, Image, Popconfirm, message, Button, Modal} from 'antd';
 import { SearchOutlined } from '@ant-design/icons';
-import checkJwt from "../../config/jwt/jwt"
 function Users(props) {
     let [data, setData] = useState("");
     let [dataSearch, setDataSearch] = useState("")
@@ -22,7 +21,9 @@ function Users(props) {
             .then((result) => {
                 let dataChange = result.data.data.map((item, index) => {
                     let source = {
-                        avatar: <Avatar src={<Image src="https://thuthuatnhanh.com/wp-content/uploads/2018/07/anh-dai-dien-dep.jpg"></Image>}></Avatar>,
+                        avatar: <Avatar src={<Image src={`${item.avatar}`}></Image>}></Avatar>,
+                        avatar: item.avatar.length === 1 ? <Avatar>{item.avatar}</Avatar> :
+                            <Avatar src={<Image src={`${item.avatar}`}></Image>}></Avatar>,
                         key: index
                     }
 
@@ -34,7 +35,6 @@ function Users(props) {
                 alert(err.response.data.message);
             })
     }, [overview])
-
     const columns = [
         {
             title: 'Avatar',
@@ -123,7 +123,6 @@ function Users(props) {
             />
         </Modal>
     )
-    console.log(data);
     return (
         <BaseLayout>
             {modalUser}
@@ -145,6 +144,7 @@ function Users(props) {
             </div>
             <div className="users">
                 <Table
+                    className="users-table"
                     columns={columns}
                     dataSource={data}
                 />
