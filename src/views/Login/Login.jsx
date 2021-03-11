@@ -79,7 +79,6 @@ function Login(props) {
             </div>
         </Modal>
     )
-
     return (
         <>
             {modalSignUp}
@@ -145,13 +144,29 @@ function Login(props) {
                                     }
                                 })
                                     .then((res) => {
-                                        localStorage.setItem("user", JSON.stringify(res.data.user))
-                                        Cookies.set('token', res.data.token, { expires: 7 });
                                         if(res.data.user.avatar){
+                                            localStorage.setItem("user", JSON.stringify(res.data.user))
+                                            Cookies.set('token', res.data.token, { expires: 7 });
                                             history.push("/blog")
                                         }else{
-                                            history.push("/updateAvarta")
+                                            axios({
+                                                method: "PUT",
+                                                url: `/user/avatar/${res.data.user._id}`,
+                                                data: {
+                                                    urlAvatar: res.data.user.username.slice(0,1).toUpperCase()
+                                                }
+                                            })
+                                            .then(async (respone)=>{
+                                                res.data.user.avatar= res.data.user.username.slice(0,1).toUpperCase()
+                                                localStorage.setItem("user", JSON.stringify(res.data.user))
+                                                Cookies.set('token', res.data.token, { expires: 7 });
+                                                history.push("/blog")
+                                             })
+                                            .catch((err)=>{ 
+                                                console.log(err);
+                                            })
                                         }
+                                        
                                     })
                                     .catch((err) => {
                                         alert(err.response.data.message)

@@ -12,6 +12,8 @@ import DetailBloog from "./views/blog/DetailBlog.jsx"
 import UpdateAvarta from "./views/users/UpdateAvarta.jsx"
 import UpdatePhone from "./views/users/UpdatePhone.jsx"
 import './App.css';
+import { PrivateRoute, PublicRoute } from './components/Router/Router';
+
 function App() {
   return (
     <Router>
@@ -19,7 +21,7 @@ function App() {
           <Route path="/user">
             <Users></Users>
           </Route>
-          <Route path="/updateAvarta">
+          <Route path="/updateAvatar">
             <UpdateAvarta></UpdateAvarta>
           </Route>
           <Route path="/updatePhone">
