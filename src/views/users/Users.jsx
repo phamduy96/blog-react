@@ -19,7 +19,6 @@ function Users(props) {
             url: "/user"
         })
             .then((result) => {
-                console.log(result)
                 let dataChange = result.data.data.map((item, index) => {
                     let source = {
                         avatar: item.avatar.length === 1 ? <Avatar>{item.avatar}</Avatar> :
