@@ -12,32 +12,31 @@ import DetailBloog from "./views/blog/DetailBlog.jsx"
 import UpdateAvarta from "./views/users/UpdateAvarta.jsx"
 import UpdatePhone from "./views/users/UpdatePhone.jsx"
 import './App.css';
-import { PrivateRoute, PublicRoute } from './components/Router/Router';
+import { PrivateRoute, PublicRoute } from './components/Router/index';
 
 function App() {
   return (
     <Router>
+
         <Switch>
-          <Route path="/user">
-            <Users></Users>
-          </Route>
-          <Route path="/updateAvatar">
+
+
+          <PrivateRoute exact={true}  path="/user" component={Users}/>
+          <Route path="/updateAvarta">
+
             <UpdateAvarta></UpdateAvarta>
           </Route>
           <Route path="/updatePhone">
             <UpdatePhone></UpdatePhone>
           </Route>
-          <Route path="/blog">
-            <Blog></Blog>
-          </Route>
+          <PrivateRoute path="/blog" component={Blog}>
+          </PrivateRoute>
           <Route path="/detailBlog/:id">
             <DetailBloog></DetailBloog>
           </Route>
+          <PublicRoute  path="/login" component={Login}/>
           <Route path="/updateBlog">
             <UpdateBlog></UpdateBlog>
-          </Route>
-          <Route path="/login">
-            <Login></Login>
           </Route>
           <Route path="*">
             <NotFound></NotFound>
