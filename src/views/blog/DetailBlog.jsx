@@ -1,122 +1,136 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import BaseLayout from "../../components/BaseLayout/BaseLayout";
 import axios from "../../config/axios/axios"
-import {useSelector} from "react-redux"
 import "../blog/DetailBlog.css"
-import { Col, Row , Image, Input, BackTop, Affix } from 'antd';
+import { Col, Row, Image, Input, BackTop, Affix, Avatar } from 'antd';
 import {
-    createFromIconfontCN ,LeftCircleOutlined, ArrowUpOutlined
+    createFromIconfontCN, LeftCircleOutlined, ArrowUpOutlined
 } from '@ant-design/icons';
 import { useHistory } from 'react-router-dom';
+import { set } from 'js-cookie';
 
 function DetailBlog(props) {
-    let [dataBlog, setDataBlog] = useState('')
-    let idBlog = window.location.href.split('http://localhost:3000/detailBlog/')[1]
+    let [dataBlog, setDataBlog] = useState("")
+    let idBlog = window.location.href.split('http://localhost:3000/detailBlog/')[1];
+    let [contentComment, setContentComment] = useState("")
     let history = useHistory()
+    let user = JSON.parse(localStorage.getItem('user'));
+    let [comments, setComments] = useState("")
+    let [overview, setOverview] = useState(false)
     const IconFont = createFromIconfontCN({
         scriptUrl: '//at.alicdn.com/t/font_8d5l8fzk5b87iudi.js',
-      });
-    useEffect(()=> {
+    });
+    useEffect(() => {
         axios({
             method: 'GET',
             url: `/detail-blog/${idBlog}`
         }).then((data) => {
-            setDataBlog(data.data.data)
+            setDataBlog(data.data.data);
         }).catch((err) => {
             console.log(err)
         })
-    }, [])
-    console.log()
+    }, [overview])
+
+    useEffect(() => {
+        if(dataBlog){
+            axios({
+                method: "GET",
+                url: `/blog/getComment/${dataBlog._id}`
+            })
+            .then((res) => {
+                setComments(res.data.data[0].idComment)
+            })
+            .catch((err) => {
+                console.dir(err)
+            })
+        }
+    }, [dataBlog])
+
+    console.log(comments)
     return (
         <BaseLayout>
-            <div  style={{paddingBottom: "20px"}}>
+            <div style={{ paddingBottom: "20px" }}>
                 <Row>
                     <Col >
                         <Affix offsetTop={280} onChange={affixed => console.log(affixed)}>
-                        <div className="icon-fix">
-                            <div>  <LeftCircleOutlined onClick={()=> {
-                                history.push("/blog")
-                            }} />  </div>
-                            <div> <IconFont type="icon-facebook" /> </div>
-                            <div> <IconFont type="icon-twitter" /> </div>
-                        </div>
-                    
+                            <div className="icon-fix">
+                                <div>  <LeftCircleOutlined onClick={() => {
+                                    history.push("/blog")
+                                }} />  </div>
+                                <div> <IconFont type="icon-facebook" /> </div>
+                                <div> <IconFont type="icon-twitter" /> </div>
+                            </div>
+
                         </Affix >
-                            { <div style={{background: "#fcfaf6"}}>
-                                <div className="container" style={{padding: "25px"}}>
-                                        <h1 style={{paddingBottom: "20px"}}> {dataBlog.title}  </h1>
-                                        <div style={{textAlign: "center", paddingBottom: "20px"}}>
-                                            <Image style={{width: "100%", height: '100%'}} 
-                                                src= {dataBlog.image}
-                                            >
-                                            </Image>
-
-                                        </div>
-                                        <h3> {dataBlog.content}   </h3>
-
+                        {<div style={{ background: "#fcfaf6" }}>
+                            <div className="container" style={{ padding: "0 25px", marginBottom: "40px" }}>
+                                <h1 style={{ paddingBottom: "20px", marginBottom: "30px", fontSize: "25px" }}> {dataBlog.title}  </h1>
+                                <div style={{ textAlign: "center", paddingBottom: "20px" }}>
+                                    <Image style={{ width: "500px", height: '300px' }}
+                                        src={dataBlog.image}
+                                    >
+                                    </Image>
+                                    <p style={{textAlign: "center", marginTop: "15px"}}>{dataBlog.introduceImg}</p>
 
                                 </div>
+                                <h3> {dataBlog.content}   </h3>
                             </div>
-                            }
-                            < hr style={{height: "3px"}}/>
-                            <div style={{paddingBottom: "30px"}}>
-                                <div className="container">
-                                    <h3 style={{fontSize: "20px", paddingBottom: "20px"}}> Comments </h3>
-                                    <Input placeholder="Y kien cua ban " type="text"/>
-                                    <button type="button" style={{marginTop: "10px", marginBottom: "20px", padding: "3px"}}> gui binh luan </button>
-                                    <div>
-                                        <Row style={{marginTop: "10px"}}>
-                                            <Col span={1}>
-                                                <div className="avatar">
-                                                    <img src="https://phunugioi.com/wp-content/uploads/2020/10/hinh-anh-avatar-doremon-cute.jpg"/>
-                                                </div>
-                                            </Col>
-                                            <Col span={23} style={{paddingLeft: "10px"}}>
-                                            <span style={{ fontWeight: "500" , paddingRight: "10px"}}> Nguyen Hung Vuong </span>
-                                            <span> phải sử lý thật nặng tội danh này. Minh cũng là nạn nhân của những vụ mua bán thông tin này, Mình có căn hộ mới nhận nhà ở Q9 nhưng ngày nào cũng bị những cuộc gọi đt tra tấn của bọn cò ( ko có lương tâm). có khi là trong giờ làm việc, khi là giờ nghỉ trưa, khi đang đi trên đường, có ngày mấy cuộc gọi hỏi có bán nhà hoặc cho thuê nhà ko. Thông tin mình có căn hộ ở khu đó mấy con cò đó lấy ở đâu ra..</span>    
-                                            </Col>
-                                        </Row>
-                                        <Row style={{marginTop: "15px"}}>
-                                            <Col span={1}>
-                                                <div className="avatar">
-                                                    <img src="http://hinhnendephd.com/wp-content/uploads/2019/10/anh-avatar-dep.jpg"/>
-                                                </div>
-                                            </Col>
-                                            <Col span={23} style={{paddingLeft: "10px"}}>
-                                            <span style={{ fontWeight: "500" , paddingRight: "10px"}}>  Pham van duy </span>
-                                            <span> phải sử lý thật nặng tội danh này. Minh cũng là nạn nhân của những vụ mua bán thông tin này, Mình có căn hộ mới nhận nhà ở Q9 nhưng ngày nào cũng bị những cuộc gọi đt tra tấn của bọn cò ( ko có lương tâm). có khi là trong giờ làm việc, khi là giờ nghỉ trưa, khi đang đi trên đường, có ngày mấy cuộc gọi hỏi có bán nhà hoặc cho thuê nhà ko. Thông tin mình có căn hộ ở khu đó mấy con cò đó lấy ở đâu ra..</span>    
-                                            </Col>
-                                        </Row>
-                                        <Row style={{marginTop: "15px"}}>
-                                            <Col span={1}>
-                                                <div className="avatar">
-                                                    <img src="https://static.yeah1.com/uploads/editors/27/2020/06/11/0k2E4QTDTs0Sx0gyeemCmcTx5v0JNxpYu062PvcV.jpeg"/>
-                                                </div>
-                                            </Col>
-                                            <Col span={23} style={{paddingLeft: "10px"}}>
-                                            <span style={{ fontWeight: "500" , paddingRight: "10px"}}> Pham tuan anh </span>
-                                            <span> phải sử lý thật nặng tội danh này. Minh cũng là nạn nhân của những vụ mua bán thông tin này, Mình có căn hộ mới nhận nhà ở Q9 nhưng ngày nào cũng bị những cuộc gọi đt tra tấn của bọn cò ( ko có lương tâm). có khi là trong giờ làm việc, khi là giờ nghỉ trưa, khi đang đi trên đường, có ngày mấy cuộc gọi hỏi có bán nhà hoặc cho thuê nhà ko. Thông tin mình có căn hộ ở khu đó mấy con cò đó lấy ở đâu ra..</span>    
-                                            </Col>
-                                        </Row>
-                                       {/* <div className='avatar' >
-                                         <img src="https://phunugioi.com/wp-content/uploads/2020/10/hinh-anh-avatar-doremon-cute.jpg"/>
-                                         <span style={{paddingLeft: "10px", fontWeight: "500" , paddingRight: "10px"}}> Nguyen Hung Vuong </span>
-                                         <span> phải sử lý thật nặng tội danh này. Minh cũng là nạn nhân của những vụ mua bán thông tin này, Mình có căn hộ mới nhận nhà ở Q9 nhưng ngày nào cũng bị những cuộc gọi đt tra tấn của bọn cò ( ko có lương tâm). có khi là trong giờ làm việc, khi là giờ nghỉ trưa, khi đang đi trên đường, có ngày mấy cuộc gọi hỏi có bán nhà hoặc cho thuê nhà ko. Thông tin mình có căn hộ ở khu đó mấy con cò đó lấy ở đâu ra..</span>   
-                                       </div> */}
-                                    </div>
+                        </div>
+                        }
+                        < hr style={{ height: "3px" }} />
+                        <div style={{ paddingBottom: "30px" }}>
+                            <div className="container">
+                                <h3 style={{ fontSize: "20px", paddingBottom: "20px" }}> Comments </h3>
+                                <Input placeholder="Y kien cua ban " type="text" onChange={(e) => {
+                                    setContentComment(e.target.value)
+                                }} />
+                                <button type="button" style={{ marginTop: "10px", marginBottom: "20px", padding: "3px", cursor: "pointer" }} onClick={() => {
+                                    axios({
+                                        method: "POST",
+                                        url: "/comment",
+                                        data: {
+                                            idBlog: dataBlog._id,
+                                            idUser: user._id,
+                                            content: contentComment
+                                        }
+                                    })
+                                        .then((res) => {
+                                            setOverview(!overview)
+                                        })
+                                        .catch((err) => {
+                                            console.dir(err);
+                                        })
+                                }}> gui binh luan </button>
+                                <div>
+                                    
+                                    { comments.length ? comments.map((item, index)=>{
+                                        return <Row style={{ marginTop: "10px" }} key={index}>
+                                        <Col span={1}>
+                                            <div className="avatar">
+                                                { item.idUser ? item.idUser.avatar.length === 1 ? <Avatar style={{color: "rgb(230, 70, 78)"}}>{item.idUser.avatar.toUpperCase()}</Avatar> : <Avatar src={`${item.idUser.avatar}`}></Avatar> : null}
+                                            </div>
+                                        </Col>
+                                        <Col span={23} style={{ paddingLeft: "10px" }}>
+                                            <span style={{ color: "#9670d4", fontWeight: "600", paddingRight: "10px", fontSize: "18px" }}> {item.idUser ? item.idUser.username : null} </span>
+                                            <span style={{fontSize: "17px" }}> {item.idUser ? item.content : null} </span>
+                                        </Col>
+                                    </Row> }) : null
+                                    }
                                 </div>
-                               
                             </div>
-                           
-                            <BackTop>
-                                <ArrowUpOutlined className="backTop"/>
-                            </BackTop>
+
+                        </div>
+
+                        <BackTop>
+                            <ArrowUpOutlined className="backTop" />
+                        </BackTop>
                     </Col>
 
                 </Row>
             </div>
-         </BaseLayout>
+        </BaseLayout>
     );
 }
 
 export default DetailBlog;
+

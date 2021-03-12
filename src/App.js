@@ -20,8 +20,10 @@ function App() {
 
         <Switch>
 
+
           <PrivateRoute exact={true}  path="/user" component={Users}/>
           <Route path="/updateAvarta">
+
             <UpdateAvarta></UpdateAvarta>
           </Route>
           <Route path="/updatePhone">

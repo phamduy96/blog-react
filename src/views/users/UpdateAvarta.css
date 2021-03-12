@@ -9,34 +9,24 @@
     margin: 100px auto;
     text-align: center;
 }
-.update-avarta p{
-    margin-top: 15px;
-}
-.update-avarta input{
+.update-avarta-input{
     width: 300px;
     height: 40px;
+    padding: 15px 20px;
     outline: none;
+    display: block;
     border: 1px solid black;
-    border-radius: 20px;
-    padding: 5px 15px;
-    font-size: 16px;
+    border-radius: 20px 20px;
+    margin: 20px auto;
 }
-
-.avarta-user{
-    width: 40px;
-    height: 40px;
-    display: inline-block;
-    font-size: 30px;
-    line-height: 40px;
-    color: rgb(223, 107, 54);
-}
-.update-avarta button{
+.update-avarta-btn{
     width: 150px;
     height: 50px;
+    cursor: pointer;
     font-size: larger;
     color: white;
     background-color: rgb(112, 214, 54);
-    margin-top: 15px;
+    margin-top: 50px;
     border: none;
     outline: none;
     border-radius: 15px;
