@@ -15,6 +15,7 @@ function DetailBlog(props) {
     let [contentComment, setContentComment] = useState("")
     let history = useHistory()
     let user = JSON.parse(localStorage.getItem('user'));
+    let time = Date.now();
     let [comments, setComments] = useState("")
     let [overview, setOverview] = useState(false)
     const IconFont = createFromIconfontCN({
@@ -30,7 +31,21 @@ function DetailBlog(props) {
             console.log(err)
         })
     }, [overview])
-
+    const dateComment = new Date("2021-03-11 02:00:00");
+    const date = new Date();
+    const a = new Date(date.getTime() - dateComment.getTime());
+    
+    console.log(a)
+    function getTimeComment(timeCreateAt) {
+        let years = Math.floor((Date.now() - timeCreateAt)/(259200 * 3600000));
+        let months = Math.floor((Date.now() - timeCreateAt - years * (259200 * 3600000))/(720 * 3600000));
+        let weeks = Math.floor((Date.now() - timeCreateAt - years * (259200 * 3600000) - months * (720 * 3600000))/(168 * 3600000));
+        let days = Math.floor((Date.now() - timeCreateAt - years * (259200 * 3600000) - months * (720 * 3600000) - weeks * (168 * 3600000))/(24 * 3600000));
+        let hours = Math.floor((Date.now() - timeCreateAt - years * (259200 * 3600000) - months * (720 * 3600000) - weeks * (168 * 3600000) - days * (24 * 3600000))/(3600000));
+        let minutes = Math.floor((Date.now() - timeCreateAt - years * (259200 * 3600000) - months * (720 * 3600000) - weeks * (168 * 3600000) - days * (24 * 3600000) - hours * 3600000)/(60000));
+        let seconds = Math.floor((Date.now() - timeCreateAt - years * (259200 * 3600000) - months * (720 * 3600000) - weeks * (168 * 3600000) - days * (24 * 3600000) - hours * 3600000 - minutes * 60000)/(1000));
+        return { years, months, days, weeks, hours, minutes, seconds}
+    }
     useEffect(() => {
         if(dataBlog){
             axios({
@@ -91,19 +106,21 @@ function DetailBlog(props) {
                                         data: {
                                             idBlog: dataBlog._id,
                                             idUser: user._id,
-                                            content: contentComment
+                                            content: contentComment,
+                                            createAt: Date.now() - 1000
                                         }
                                     })
                                         .then((res) => {
                                             setOverview(!overview)
                                         })
                                         .catch((err) => {
-                                            console.dir(err);
+                                            alert(err.response.data.message)
                                         })
                                 }}> gui binh luan </button>
                                 <div>
                                     
                                     { comments.length ? comments.map((item, index)=>{
+                                        let timeAgo = getTimeComment(item.createAt)
                                         return <Row style={{ marginTop: "10px" }} key={index}>
                                         <Col span={1}>
                                             <div className="avatar">
@@ -112,7 +129,23 @@ function DetailBlog(props) {
                                         </Col>
                                         <Col span={23} style={{ paddingLeft: "10px" }}>
                                             <span style={{ color: "#9670d4", fontWeight: "600", paddingRight: "10px", fontSize: "18px" }}> {item.idUser ? item.idUser.username : null} </span>
-                                            <span style={{fontSize: "17px" }}> {item.idUser ? item.content : null} </span>
+                                            <span style={{fontSize: "14px", color: "#424447" }}>{timeAgo.years ? timeAgo.years : null}
+                                                {timeAgo.years ? <span style={{marginRight: "7px", marginLeft: "5px"}}>years</span> : null}
+                                                {timeAgo.months ? timeAgo.months : null}
+                                                {timeAgo.months ? <span style={{marginRight: "7px", marginLeft: "5px"}}>months</span> : null}
+                                                {timeAgo.weeks ? timeAgo.weeks : null}
+                                                {timeAgo.weeks ? <span style={{marginRight: "7px", marginLeft: "5px"}}>weeks</span> : null}
+                                                {timeAgo.days ? timeAgo.days : null}
+                                                {timeAgo.days ? <span style={{marginRight: "7px", marginLeft: "5px"}}>days</span> : null}
+                                                {timeAgo.hours ? timeAgo.hours : null}
+                                                {timeAgo.hours ? <span style={{marginRight: "7px", marginLeft: "5px"}}>hours</span> : null}
+                                                {timeAgo.minutes ? timeAgo.minutes : null}
+                                                {timeAgo.minutes ? <span style={{marginRight: "7px", marginLeft: "5px"}}>minutes</span> : null}
+                                                {timeAgo.seconds ? timeAgo.seconds : null}
+                                                {timeAgo.seconds ? <span style={{marginRight: "7px", marginLeft: "5px"}}>seconds</span> : null}
+                                                <span>ago</span>
+                                            </span>
+                                            <span className="detailBlog-commentContent" style={{fontSize: "16px" }}> {item.idUser ? item.content : null} </span> 
                                         </Col>
                                     </Row> }) : null
                                     }
