@@ -99,12 +99,10 @@ function Login(props) {
                                 },
                             ]}
                         >
-                            <p className="input-style">
-                                <span><MailOutlined style={{ fontSize: "22px" }} /></span>
-                                <Input placeholder="Nhập email" onChange={(e) => {
+                            
+                                <Input prefix={<MailOutlined style={{ fontSize: "25px" }} />} placeholder="Nhập email" onChange={(e) => {
                                     setEmail(e.target.value)
                                 }} />
-                            </p>
                         </Form.Item>
                         <h1>Password</h1>
                         <Form.Item
@@ -117,12 +115,9 @@ function Login(props) {
                                 },
                             ]}
                         >
-                            <p className="input-style">
-                                <span><LockOutlined style={{ fontSize: "22px" }} /></span>
-                                <Input placeholder="Nhập password" type="password" onChange={(e) => {
+                                <Input.Password prefix={<LockOutlined style={{ fontSize: "25px" }} />} placeholder="Nhập password" type="password" onChange={(e) => {
                                     setPassword(e.target.value)
                                 }} />
-                            </p>
                             <p></p>
                         </Form.Item>
 
