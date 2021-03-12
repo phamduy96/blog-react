@@ -4,8 +4,6 @@ import {
     GlobalOutlined, VideoCameraOutlined, QuestionCircleOutlined,
     StrikethroughOutlined, CustomerServiceOutlined, CaretRightOutlined
 } from '@ant-design/icons';
-import {useDispatch, useSelector} from "react-redux"
-import actions from "../../redux/actions/IDBlog"
 import axios from "../../config/axios/axios"
 import BaseLayout from "../../components/BaseLayout/BaseLayout"
 import "./Blog.css"
@@ -15,7 +13,6 @@ function Blog(props) {
     let [overView, setOverView] = useState(false)
     let [dataBlog, setDataBlog] = useState("")
     let [showSiderBar, setShowSiderBar] = useState("")
-    let dispatch = useDispatch();
     useEffect(() => {
         axios({
             method: "GET",
@@ -71,7 +68,6 @@ function Blog(props) {
                                     <div className="blog-prominences-title">
                                         <h4 onClick={()=>{
                                             history.push(`/detailBlog/${dataBlog[0]._id}`)
-                                            dispatch(actions.IDBlog({idBlog: dataBlog[0]._id}))
                                         }}>{dataBlog.length ? dataBlog[0].title : null}</h4>
                                         <p>{dataBlog.length ? dataBlog[0].content: null}</p>
                                     </div>
@@ -84,7 +80,6 @@ function Blog(props) {
                                 <div className="lists-blog" key={index}>
                                         <h4 onClick={()=>{
                                             history.push(`/detailBlog/${item._id}`)
-                                            dispatch(actions.IDBlog({idBlog: item._id}))
                                         }}>{item.title}</h4>
                                         <div className="blog-child">
                                             <Image className="blog-child-image"

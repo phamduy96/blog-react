@@ -17,11 +17,13 @@ import { PrivateRoute, PublicRoute } from './components/Router/index';
 function App() {
   return (
     <Router>
-
         <Switch>
-
           <PrivateRoute exact={true}  path="/user" component={Users}/>
-          <Route path="/updateAvarta">
+          <Route path="/updateAvarta" />
+          <Route path="/user">
+            <Users></Users>
+          </Route>
+          <Route path="/updateAvatar">
             <UpdateAvarta></UpdateAvarta>
           </Route>
           <Route path="/updatePhone">

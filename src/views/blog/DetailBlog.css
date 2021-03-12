@@ -24,11 +24,14 @@
     border: 1px solid #93908a;
     padding: 4px;
 }
-.avatar img{
-    width: 40px;
-    height: 40px;
+.avatar .ant-avatar{
+    width: 35px;
+    height: 35px;
     border-radius: 50%;
     overflow: hidden;
+}
+.avatar .ant-avatar-string{
+    font-size: 19px;
 }
 @media screen and (max-width: 576px){
     .container{
