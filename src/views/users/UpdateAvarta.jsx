@@ -1,62 +1,49 @@
 import React, { useState } from 'react';
-import axios from "../../config/axios/axios";
-import "./UpdateAvarta.css"
 import { Upload, message, Button } from 'antd';
 import { UploadOutlined } from '@ant-design/icons';
-import { useHistory } from 'react-router-dom';
+import axios from 'axios';
 
-function UpdateAvarta(props) {
-  let history = useHistory()
-  let user = JSON.parse(localStorage.getItem('user'));
-  let [urlAvatar, setUrlAvatar] = useState("")
-  const prop = {
+function UpdateAvatar() {
+  let user = JSON.parse(localStorage.getItem("user"))
+  const props = {
     name: 'file',
-    action: '/module/profile',
+    action: 'http://localhost:3001/module/uploadfile',
     headers: {
       authorization: 'authorization-text',
     },
     onChange(info) {
       if (info.file.status !== 'uploading') {
-        console.log(info.file, info.fileList);
+        
       }
       if (info.file.status === 'done') {
-        console.log(info.file)
-
+        axios({
+          method: "PUT",
+          url: `/user/avatar/${user._id}`,
+          data: {
+            urlAvatar: info.file.response
+          }
+        })
+        .then((res)=>{
+          user.avatar = info.file.response;
+          localStorage.setItem("user", JSON.stringify(user))
+          alert(res.data.message)
+        }).catch((err)=>{
+          alert(err.response.data.message)
+        })
+        message.success(`${info.file.name} file uploaded successfully`);
       } else if (info.file.status === 'error') {
         message.error(`${info.file.name} file upload failed.`);
       }
     },
   };
+    return (
+        <>
+          <Upload {...props}>
+            <Button icon={<UploadOutlined />}>Click to Upload</Button>
+          </Upload>
+        </>
 
-  return (
-    <div className="update-avarta">
-      <p>Vui lòng cập nhật Avarta của bạn </p>
-      <input className="update-avarta-input" type="text" placeholder="Nhập URL Avatar" onChange={(e)=>{
-        setUrlAvatar(e.target.value)
-      }}/>
-      <Upload {...prop}>
-        <Button icon={<UploadOutlined />}>Click to Upload</Button>
-      </Upload>
-      <button className="update-avarta-btn" onClick={() => {
-        axios({
-          method: "POST",
-          url: `/upload`,
-          data: {
-            urlAvatar: urlAvatar ? urlAvatar : user.username.slice(0, 1).toUpperCase()
-          }
-        })
-          .then((res) => {
-            user.avatar = urlAvatar;
-            localStorage.setItem("user", JSON.stringify(user))
-            alert(res.data.message)
-            history.push("blog")
-          })
-          .catch((err) => {
-            alert(err.response.data.message)
-          })
-      }}>Cập nhật</button>
-    </div>
-  );
+    );
 }
 
-export default UpdateAvarta;
+export default UpdateAvatar;

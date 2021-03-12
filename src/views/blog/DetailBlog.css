@@ -30,8 +30,27 @@
     border-radius: 50%;
     overflow: hidden;
 }
+.comment-detailblog{
+    display: flex;
+    margin-bottom: 20px;
+}
+.comment-detailblog input{
+    margin-left: 10px;
+    border: none;
+    outline: none;
+    border-bottom: 1px solid black;
+}
+.comment-detailblog span{
+    width: 35px;
+    height: 35px;
+    font-size: 25px;
+    color: brown;
+}
 .avatar .ant-avatar-string{
     font-size: 19px;
+}
+.detailBlog-commentContent{
+    display: block;
 }
 @media screen and (max-width: 576px){
     .container{

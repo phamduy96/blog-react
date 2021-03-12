@@ -11,18 +11,19 @@ import UpdateBlog from "./views/updateBlog/UpdateBlog.jsx"
 import DetailBloog from "./views/blog/DetailBlog.jsx"
 import UpdateAvarta from "./views/users/UpdateAvarta.jsx"
 import UpdatePhone from "./views/users/UpdatePhone.jsx"
+import LoginAdmin from "./views/Login/LoginAdmin"
 import './App.css';
-import { PrivateRoute, PublicRoute } from './components/Router/index';
+import { PrivateRoute, PublicRoute } from './components/Router/index.jsx';
 
 function App() {
   return (
     <Router>
         <Switch>
+          <PublicRoute exact={true}  path="/" component={Login}/>
           <PrivateRoute exact={true}  path="/user" component={Users}/>
           <Route path="/updateAvarta" />
-          <Route path="/user">
-            <Users></Users>
-          </Route>
+          <PublicRoute  path="/login-admin" component={LoginAdmin}/>
+          <PrivateRoute routeRole='admin' exact={true}  path="/user" component={Users}/>
           <Route path="/updateAvatar">
             <UpdateAvarta></UpdateAvarta>
           </Route>
@@ -34,8 +35,7 @@ function App() {
           <Route path="/detailBlog/:id">
             <DetailBloog></DetailBloog>
           </Route>
-          <PublicRoute  path="/login" component={Login}/>
-          <Route path="/updateBlog">
+          <Route path="/addNewBlog">
             <UpdateBlog></UpdateBlog>
           </Route>
           <Route path="*">

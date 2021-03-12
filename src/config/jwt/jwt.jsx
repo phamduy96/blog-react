@@ -1,10 +1,14 @@
 import axios from "../axios/axios"
-function checkJwt(params) {
+import Cookies from "js-cookie";
+let token = Cookies.get('token');
+function checkJwt() {
     axios({
         method: "POST",
-        url: "/user/checkJwt"
-    })
-    .then((res)=>{
-        console.log(res);
+        url: "/user/checkJwt",
+        data: {
+            token: token
+        }
     })
 }
+
+export default checkJwt
