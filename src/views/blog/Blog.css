@@ -20,6 +20,7 @@
 }
 .blog-siderbar:hover{
     overflow-y: visible;
+    overflow-x: scroll;
     scroll-behavior: smooth;
 }
 .blog-siderbar ul{

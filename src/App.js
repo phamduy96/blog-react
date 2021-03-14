@@ -12,6 +12,7 @@ import DetailBloog from "./views/blog/DetailBlog.jsx"
 import UpdateAvarta from "./views/users/UpdateAvarta.jsx"
 import UpdatePhone from "./views/users/UpdatePhone.jsx"
 import LoginAdmin from "./views/Login/LoginAdmin"
+import Infinity from "./views/Infinity"
 import './App.css';
 import { PrivateRoute, PublicRoute } from './components/Router/index.jsx';
 
@@ -22,7 +23,7 @@ function App() {
         <Switch>
           <PublicRoute  path="/login" component={Login}/>
           <PublicRoute  path="/login-admin" component={LoginAdmin}/>
-
+          <PublicRoute  path="/i" component={Infinity}/>
           <PrivateRoute routeRole='admin' exact={true}  path="/user" component={Users}/>
           <Route path="/updateAvatar">
             <UpdateAvarta></UpdateAvarta>

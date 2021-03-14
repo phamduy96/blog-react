@@ -74,7 +74,11 @@ function BaseLayout(props) {
   getDay(day)
 
   return (
-    <Layout className="layout">
+    <Layout onClick={()=>{
+      if(showBaseLayoutSelect){
+        setShowBaseLayoutSelect("")
+      }
+    }} className="layout">
       <Header className="header">
         {drawer}
         <span><img className="logo-header" src={logoHeader} alt="" /></span>

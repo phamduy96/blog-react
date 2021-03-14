@@ -1,5 +1,10 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
 .updateBlog-form{
-    width: 800px;
+    width: 80%;
     margin: 50px auto;
 }
 .updateBlog-form input{
@@ -22,6 +27,7 @@
     border-radius: 15px;
     border: none;
     outline: none;
+    cursor: pointer;
 }
 .updateBlog-content{
     width: 100%;

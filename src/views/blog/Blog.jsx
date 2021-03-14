@@ -32,7 +32,7 @@ function Blog(props) {
             <div className="blog-content">
                 <div style={showSiderBar ? showSiderBar : {}} className="blog-siderbar">
                     <ul>
-                        <li><GlobalOutlined style={{ fontSize: "22px", color: "blue", marginRight: "10px" }}></GlobalOutlined> THời sự</li>
+                        <li><GlobalOutlined style={{ fontSize: "22px", color: "blue", marginRight: "10px" }}></GlobalOutlined> Thời sự</li>
                         <li><GlobalOutlined style={{ fontSize: "22px", color: "blue", marginRight: "10px" }}></GlobalOutlined> Thế giới</li>
                         <li><GlobalOutlined style={{ fontSize: "22px", color: "blue", marginRight: "10px" }}></GlobalOutlined> Góc nhìn</li>
                         <li><GlobalOutlined style={{ fontSize: "22px", color: "blue", marginRight: "10px" }}></GlobalOutlined> Thể thao</li>

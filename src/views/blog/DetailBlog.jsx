@@ -1,12 +1,10 @@
+import { ArrowUpOutlined, createFromIconfontCN, LeftCircleOutlined } from '@ant-design/icons';
+import { Affix, Avatar, BackTop, Col, Image, Input, Row } from 'antd';
 import React, { useEffect, useState } from 'react';
-import BaseLayout from "../../components/BaseLayout/BaseLayout";
-import axios from "../../config/axios/axios"
-import "../blog/DetailBlog.css"
-import { Col, Row, Image, Input, BackTop, Affix, Avatar } from 'antd';
-import {
-    createFromIconfontCN, LeftCircleOutlined, ArrowUpOutlined
-} from '@ant-design/icons';
 import { useHistory } from 'react-router-dom';
+import BaseLayout from "../../components/BaseLayout/BaseLayout";
+import axios from "../../config/axios/axios";
+import "../blog/DetailBlog.css";
 
 function DetailBlog(props) {
     let [dataBlog, setDataBlog] = useState("")
@@ -30,6 +28,10 @@ function DetailBlog(props) {
         })
     }, [overview])
 
+    useEffect(() => {
+        const contentCommnet = document.getElementById("commentID");
+        console.log(contentCommnet);
+    }, [contentComment])
 
     function getTimeComment(timeCreateAt) {
         let years = Math.floor((Date.now() - timeCreateAt) / (259200 * 3600000));
@@ -56,12 +58,33 @@ function DetailBlog(props) {
         }
     }, [dataBlog])
 
-    if(comments){
-        comments = comments.filter((item)=>{
+    if (comments) {
+        comments = comments.filter((item) => {
             return item.idUser
         })
     }
 
+    const handleSubmit = () => {
+        let valueComment = document.getElementById("commentID").value;
+        axios({
+            method: "POST",
+            url: "/comment",
+            data: {
+                idBlog: dataBlog._id,
+                idUser: user._id,
+                content: valueComment,
+                createAt: Date.now() - 1000
+            }
+        })
+        .then((res) => {
+            document.getElementById("commentID").value = "";
+            console.log(document.getElementById("commentID").value)
+            setOverview(!overview)
+        })
+        .catch((err) => {
+            alert(err.response.data.message)
+        })
+    }
 
     return (
         <BaseLayout>
@@ -99,39 +122,20 @@ function DetailBlog(props) {
                                 <h3 style={{ fontSize: "20px", paddingBottom: "20px" }}> {comments.length} Comments </h3>
                                 <div className="comment-detailblog">
                                     {user.avatar ? user.avatar.length === 1 ? <Avatar>{user.avatar.toUpperCase()}</Avatar> : <Avatar src={user.avatar}></Avatar> : null}
-                                    <Input placeholder="Y kien cua ban... " type="text" onChange={(e) => {
-                                        setContentComment(e.target.value)
-                                    }} />
+                                    <Input id="commentID" placeholder="Y kien cua ban... " type="text"/>
                                 </div>
-                                <button type="button" style={{ marginTop: "10px", marginBottom: "20px", padding: "3px", cursor: "pointer" }} onClick={() => {
-                                    axios({
-                                        method: "POST",
-                                        url: "/comment",
-                                        data: {
-                                            idBlog: dataBlog._id,
-                                            idUser: user._id,
-                                            content: contentComment,
-                                            createAt: Date.now() - 1000
-                                        }
-                                    })
-                                        .then((res) => {
-                                            setOverview(!overview)
-                                        })
-                                        .catch((err) => {
-                                            alert(err.response.data.message)
-                                        })
-                                }}> gui binh luan </button>
+                                <button type="button" style={{ marginTop: "10px", marginBottom: "20px", padding: "3px", cursor: "pointer" }} onClick={handleSubmit}> gui binh luan </button>
                                 <div>
 
                                     {comments.length ? comments.map((item, index) => {
                                         let timeAgo = getTimeComment(item.createAt)
                                         return <Row style={{ marginTop: "10px" }} key={index}>
-                                            <Col span={1}>
+                                            <Col xs={3} sm={2}>
                                                 <div className="avatar">
                                                     {item.idUser ? item.idUser.avatar.length === 1 ? <Avatar style={{ color: "rgb(230, 70, 78)" }}>{item.idUser.avatar.toUpperCase()}</Avatar> : <Avatar src={`${item.idUser.avatar}`}></Avatar> : null}
                                                 </div>
                                             </Col>
-                                            <Col span={23} style={{ paddingLeft: "10px" }}>
+                                            <Col xs={21} sm={22} style={{ paddingLeft: "10px" }}>
                                                 <span style={{ color: "#9670d4", fontWeight: "600", paddingRight: "10px", fontSize: "18px" }}> {item.idUser ? item.idUser.username : null} </span>
                                                 <span style={{ fontSize: "14px", color: "#424447" }}>{timeAgo.years ? timeAgo.years : null}
                                                     {timeAgo.years ? <span style={{ marginRight: "7px", marginLeft: "5px" }}>years</span> : null}
