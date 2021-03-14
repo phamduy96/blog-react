@@ -3,37 +3,31 @@
     margin: 0;
     box-sizing: border-box;
 }
-.update-avarta{
-    font-size: 18px;
-    width: 80%;
-    margin: 100px auto;
-    text-align: center;
-}
-.update-avarta-input{
-    width: 300px;
-    height: 40px;
-    padding: 15px 20px;
-    outline: none;
-    display: block;
-    border: 1px solid black;
-    border-radius: 20px 20px;
-    margin: 20px auto;
-}
-.update-avarta-btn{
-    width: 150px;
-    height: 50px;
-    cursor: pointer;
-    font-size: larger;
-    color: white;
-    background-color: rgb(112, 214, 54);
-    margin-top: 50px;
-    border: none;
-    outline: none;
-    border-radius: 15px;
-}
 
-@media screen and (max-width: 330px){
-    .update-avarta{
-        width: 95%;
-    }
+.containe{
+    width: 80% !important;
+    margin: 0 auto;
+}
+.camera {
+    position: relative;
+    top: 35px;
+    right: 25px;
+    width: 30px;
+    height: 30px;
+    background-color: #8cc848;
+    border-radius: 50px;
+    border: 2px solid white;
+    cursor: pointer;
+  }
+  .content{
+      background: white;
+  }
+.ant-upload-list-item-name{
+    display: none;
+}
+.ant-upload-list-text-container{
+    display: none;
+}
+.ant-message{
+    display: none;
 }

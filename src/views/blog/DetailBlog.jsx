@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import BaseLayout from "../../components/BaseLayout/BaseLayout";
+import BaseLayout from "../../components/BaseLayout/BaseLayout1";
 import axios from "../../config/axios/axios"
 import "../blog/DetailBlog.css"
 import { Col, Row, Image, Input, BackTop, Affix, Avatar } from 'antd';
@@ -68,7 +68,7 @@ function DetailBlog(props) {
             <div style={{ paddingBottom: "20px" }}>
                 <Row>
                     <Col >
-                        <Affix offsetTop={280} onChange={affixed => console.log(affixed)}>
+                        <Affix offsetTop={240} onChange={affixed => console.log(affixed)}>
                             <div className="icon-fix">
                                 <div>  <LeftCircleOutlined onClick={() => {
                                     history.push("/blog")
@@ -78,7 +78,7 @@ function DetailBlog(props) {
                             </div>
 
                         </Affix >
-                        {<div style={{ background: "#fcfaf6" }}>
+                        {<div>
                             <div className="container" style={{ padding: "0 25px", marginBottom: "40px" }}>
                                 <h1 style={{ paddingBottom: "20px", marginBottom: "30px", fontSize: "25px" }}> {dataBlog.title}  </h1>
                                 <div style={{ textAlign: "center", paddingBottom: "20px" }}>
@@ -131,7 +131,7 @@ function DetailBlog(props) {
                                                     {item.idUser ? item.idUser.avatar.length === 1 ? <Avatar style={{ color: "rgb(230, 70, 78)" }}>{item.idUser.avatar.toUpperCase()}</Avatar> : <Avatar src={`${item.idUser.avatar}`}></Avatar> : null}
                                                 </div>
                                             </Col>
-                                            <Col span={23} style={{ paddingLeft: "10px" }}>
+                                            <Col span={23} style={{ paddingLeft: "30px" }}>
                                                 <span style={{ color: "#9670d4", fontWeight: "600", paddingRight: "10px", fontSize: "18px" }}> {item.idUser ? item.idUser.username : null} </span>
                                                 <span style={{ fontSize: "14px", color: "#424447" }}>{timeAgo.years ? timeAgo.years : null}
                                                     {timeAgo.years ? <span style={{ marginRight: "7px", marginLeft: "5px" }}>years</span> : null}
@@ -158,10 +158,6 @@ function DetailBlog(props) {
                             </div>
 
                         </div>
-
-                        <BackTop>
-                            <ArrowUpOutlined className="backTop" />
-                        </BackTop>
                     </Col>
 
                 </Row>
