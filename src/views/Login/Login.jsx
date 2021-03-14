@@ -100,7 +100,7 @@ function Login(props) {
                             ]}
                         >
                             
-                                <Input prefix={<MailOutlined style={{ fontSize: "25px" }} />} placeholder="Nhập email" onChange={(e) => {
+                                <Input prefix={<MailOutlined style={{ fontSize: "25px" ,paddingRight: '7px'}} />} style={{fontSize: '50px', }} placeholder="Nhập email" onChange={(e) => {
                                     setEmail(e.target.value)
                                 }} />
                         </Form.Item>
@@ -115,7 +115,7 @@ function Login(props) {
                                 },
                             ]}
                         >
-                                <Input.Password prefix={<LockOutlined style={{ fontSize: "25px" }} />} placeholder="Nhập password" type="password" onChange={(e) => {
+                                <Input.Password prefix={<LockOutlined style={{ fontSize: "25px", paddingRight: '7px' }} />} placeholder="Nhập password" type="password" onChange={(e) => {
                                     setPassword(e.target.value)
                                 }} />
                             <p></p>

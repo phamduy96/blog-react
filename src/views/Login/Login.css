@@ -93,6 +93,9 @@
 .ant-modal-footer span{
     font-size: 22px;
 }
+.ant-input{
+    font-size: 17px;
+}
 @media screen and (max-width: 768px){
     .ant-layout-content{
         background-color:rgb(242, 243, 241) !important;

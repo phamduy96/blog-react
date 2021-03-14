@@ -18,7 +18,7 @@ export const PrivateRoute = ({ component: Component, ...rest }) => {
         let user = JSON.parse(localStorage.getItem("user"))
         let componentRender = <Component {...props} />;
         let loginComponnent = <Redirect
-          to='/login'
+          to='/'
         />
         if(token){
           switch(rest.routeRole){

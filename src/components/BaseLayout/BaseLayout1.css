@@ -123,7 +123,20 @@
 .ant-avatar{
     background: #ccc0;
 }
+.backTop svg{
+    height: 30px;
+    width: 30px;
+    line-height: '40px';
+    color: '#93908a';
+    text-align: 'center';
+    font-size: 14;
+}
+.backTop{
+    border: 1px solid #93908a;
+    padding: 4px;
+}
 @media screen and (max-width: 768px){
+  
     .ant-layout-content{
         width: 100% !important;
         margin-top: 65px;
@@ -135,6 +148,7 @@
         text-align: center !important;
     }
 }
+
 @media screen and (max-width: 576px){
     .ant-menu-dark.ant-menu-horizontal > .ant-menu-item{
         display: none !important;
