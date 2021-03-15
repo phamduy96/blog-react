@@ -29,8 +29,8 @@ function UpdateAvatar() {
         .then((res)=>{
           user.avatar = info.file.response;
           localStorage.setItem("user", JSON.stringify(user))
-          setAvatar(!avatar)
           alert(res.data.message)
+          setAvatar(!avatar)
         }).catch((err)=>{
           alert(err.response.data.message)
         })

@@ -18,6 +18,7 @@ function DetailBlog(props) {
     let user = JSON.parse(localStorage.getItem('user'));
     let [comments, setComments] = useState("")
     let [overview, setOverview] = useState(false)
+    let [worldBlog, setWorldBlog] = useState("")
     const IconFont = createFromIconfontCN({
         scriptUrl: '//at.alicdn.com/t/font_8d5l8fzk5b87iudi.js',
     });
@@ -61,32 +62,41 @@ function DetailBlog(props) {
                 })
         }
     }, [dataBlog])
+    useEffect(() => {
+        axios({
+            method: "GET",
+            url: `/blog/world`
+        })
+            .then((res) => {
+                setWorldBlog(res.data.data)
+            })
+            .catch((err) => {
+                alert(err.response.data.message)
+            })
+    }, [])
+    function shuffle(array) {
+        var currentIndex = array.length;
+        while (0 !== currentIndex) {
 
+            // Pick a remaining element...
+            let randomIndex = Math.floor(Math.random() * currentIndex);
+            currentIndex -= 1;
+
+            // And swap it with the current element.
+            let temporaryValue = array[currentIndex];
+            array[currentIndex] = array[randomIndex];
+            array[randomIndex] = temporaryValue;
+        }
+
+        return array;
+    }
+    var WorldBlosShuffle = null;
+    if (worldBlog) {
+        WorldBlosShuffle = shuffle(worldBlog)
+    }
     if (comments) {
         comments = comments.filter((item) => {
             return item.idUser
-        })
-    }
-
-    const handleSubmit = () => {
-        let valueComment = document.getElementById("commentID").value;
-        axios({
-            method: "POST",
-            url: "/comment",
-            data: {
-                idBlog: dataBlog._id,
-                idUser: user._id,
-                content: valueComment,
-                createAt: Date.now() - 1000
-            }
-        })
-        .then((res) => {
-            document.getElementById("commentID").value = "";
-            console.log(document.getElementById("commentID").value)
-            setOverview(!overview)
-        })
-        .catch((err) => {
-            alert(err.response.data.message)
         })
     }
 
@@ -106,7 +116,7 @@ function DetailBlog(props) {
             <div className='container' style={{ paddingBottom: "20px" }}>
               
                 <Row>
-                    <Col md={18}>
+                    <Col md={18} xs={24}>
                         {<div>
                             <div  style={{ padding: "0 25px", marginBottom: "70px" }}>
                                 <h1 style={{ paddingBottom: "20px", marginBottom: "30px", fontSize: "25px" }}> {dataBlog.title}  </h1>
@@ -128,10 +138,10 @@ function DetailBlog(props) {
                                 <h3 style={{fontSize: '20px' ,fontWeight: 'bolder', color:'#f69631', }}> {comments.length} COMMENTS </h3>
                                 <div className="comment-detailblog">
                                     {user.avatar ? user.avatar.length === 1 ? <Avatar>{user.avatar.toUpperCase()}</Avatar> : <Avatar src={user.avatar}></Avatar> : null}
-                                    <Input id="commentID" placeholder="Y kien cua ban... " type="text"/>
+                                    <Input onChange={(e)=>{setContentComment(e.target.value)}} placeholder="Y kien cua ban... " type="text"/>
                                 </div>
                                 <Button style={{marginBottom: '10px'}} type="primary" onClick={() => {
-                                    axios({
+                                    contentComment ? axios({
                                         method: "POST",
                                         url: "/comment",
                                         data: {
@@ -146,7 +156,7 @@ function DetailBlog(props) {
                                         })
                                         .catch((err) => {
                                             alert(err.response.data.message)
-                                        })
+                                        }) : setContentComment("")
                                 }}> Gửi bình luận </Button>
                                 <div>
 
@@ -186,29 +196,25 @@ function DetailBlog(props) {
 
                         </div>
                     </Col>
-                    <Col span={6}>
-                        <iframe style={{width: '100%',height:'600px', marginBottom:'20px', border: 'none'}} src="https://ds.polyad.net/ads/h/havenpark/2021/03/11/50635/300x600/dfp/pc/std/fixed/?link=https%3A%2F%2Fadclick.g.doubleclick.net%2Fpcs%2Fclick%3Fxai%3DAKAOjsvsTiaJPkBzDpZXAhbHMGAk2cfUupf7I5haxGGpJd9xIL0i7g8V-DFoHmhSHo52vK_vD5t92t1HH_hBx0xvfGzRRTWalvey212MuS_tVQwU8mC1xMj3qHaMIpPiONuZFEpQyb62Yg5y0xZH51jhE7kTadjetcGgfVJTlVftf-Fut9lXsr7zMbhbUwA0bUTBVBcuA-Hgwa6mucD6O1iIeB4Fw1bWMSZDBc9_zL_AH-sZqWJ3L7u3Tl4Q9aAXc4sVHJIU7GF6NQwz5eHJ5eKWjsLsMXQQ4KA-a1Uwf-ZjoW0_m1AI8quDLj6pcS9OEkTaVFKbZWXVbxYAG9jUcSs%26sai%3DAMfl-YTkW8b_BBv-yllLQ8NBCRpzKoNRDtVZNNyrnpMjXZsQLSK6IJUMe-XPjKlBouwC-EhAFuXHOSYkbIzbRWIsS2Wc4UL-H_2pyHlUSUEJgcvKhWRcqG9UpX42r4Fv6M8cykeU%26sig%3DCg0ArKJSzLpJOQP-9zBWEAE%26urlfix%3D1%26adurl%3Dhttps%253A%252F%252Fhavenpark.ecopark.com.vn%252F%253Futm_source%253DVNE%2526utm_medium%253Dlarge&otherlink=&campaign_name=HavenPark%20&index_brand=LB1001.8_Ecopark%20&index_industrial=L1001_B%E1%BA%A5t%20%C4%91%E1%BB%99ng%20s%E1%BA%A3n" alt=""/>
-                        <h3 style={{fontSize: '20px' ,fontWeight: 'bolder', color:'#f69631', }}> TIN THẾ GIỚI </h3>
-                        <div>
-                            <Image style={{width: '100%'}} src='https://i1-vnexpress.vnecdn.net/2021/03/14/lloyd-austin-5-3549-1615710645.jpg?w=0&h=0&q=100&dpr=2&fit=crop&s=L198TOHoewn8imzQkvwASA'/>
-                            <div style={{width:'100%',height:'350px',overflowY: 'scroll', paddingBottom: '8px'}}>
-                                <div className='text-title' style={{paddingTop:'5px'}}>
-                                    <h3>Mỹ muốn cùng đồng minh châu Á răn đe Trung Quốc</h3>
-                                    <p>Bộ trưởng Quốc phòng Mỹ đề cao hợp tác quân sự với các đồng minh châu Á nhằm duy trì lợi thế, xây dựng khả năng răn đe Trung Quốc. </p>
-                                    <hr/>
-                                </div>
-                                <div  className='text-title' style={{paddingTop:'5px'}}>
-                                    <h3>Mỹ muốn cùng đồng minh châu Á răn đe Trung Quốc</h3>
-                                    <p>Bộ trưởng Quốc phòng Mỹ đề cao hợp tác quân sự với các đồng minh châu Á nhằm duy trì lợi thế, xây dựng khả năng răn đe Trung Quốc. </p>
-                                    <hr/>
-                                </div>
-                                <div  className='text-title' style={{paddingTop:'5px'}}>
-                                    <h3>Mỹ muốn cùng đồng minh châu Á răn đe Trung Quốc</h3>
-                                    <p>Bộ trưởng Quốc phòng Mỹ đề cao hợp tác quân sự với các đồng minh châu Á nhằm duy trì lợi thế, xây dựng khả năng răn đe Trung Quốc. </p>
-                                    <hr/>
-                                </div>
+                    <Col md={6} xs={24}>
+                        <img className='banner' style={{ width: '100%', paddingTop: '10px', marginBottom: '50px' }} src="https://news.mogi.vn/wp-content/uploads/2020/09/bannerbatdongsan041.jpg" alt="" />
+                        <h3 style={{ fontSize: '20px', fontWeight: 'bolder', color: '#f69631', }}> TIN THẾ GIỚI </h3>
+                        {worldBlog.length ? <div>
+                            <Image style={{ width: "100%" }} src={WorldBlosShuffle[0].image} />
+                            <div style={{ width: '100%', height: '350px', overflowY: 'scroll', paddingBottom: '8px' }}>
+                                {WorldBlosShuffle.map((item, index) => {
+                                    return <div key={index} className='text-title' style={{ paddingTop: '5px' }}>
+                                        <h3 onClick={() => {
+                                            setOverview(!overview)
+                                            history.push(`/detailBlog/${item._id}`)
+                                        }}>{item.title}</h3>
+                                        <p>{item.content.slice(0, 150)} </p>
+                                        <hr />
+                                    </div>
+
+                                })}
                             </div>
-                        </div>
+                        </div> : null}
                     </Col>
 
                 </Row>
