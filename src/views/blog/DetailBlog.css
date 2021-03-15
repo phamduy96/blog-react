@@ -11,19 +11,6 @@
     height: 25px;
     color: #93908a;
 }
-
-.backTop svg{
-    height: 30px;
-    width: 30px;
-    line-height: '40px';
-    color: '#93908a';
-    text-align: 'center';
-    font-size: 14;
-}
-.backTop{
-    border: 1px solid #93908a;
-    padding: 4px;
-}
 .avatar .ant-avatar{
     width: 35px;
     height: 35px;

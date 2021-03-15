@@ -22,7 +22,7 @@ function UpdateBlog(props) {
                     <option value="heath">Sức khỏe</option>
                     <option value="education">Giáo dục</option>
                     <option value="fulball">Bóng đá</option>
-                    <option value="technology">Công nghệ</option>
+                    <option value="technology">Khoa học</option>
                 </select>
                 <input placeholder="Nhập src image blog" type="text" onChange={(e) => {
                     setSrcImg(e.target.value)

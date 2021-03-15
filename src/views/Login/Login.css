@@ -6,8 +6,12 @@
     justify-content: space-around;
 }
 .text-introduce{
-    margin-top: 10%;
+    margin-top: 5%;
     padding-right: 20px;
+}
+.text-introduce img{
+    width: 400px;
+    height: auto;
 }
 .background-img{
     width: 500px;
@@ -93,16 +97,37 @@
 .ant-modal-footer span{
     font-size: 22px;
 }
+.ant-input{
+    font-size: 17px;
+}
 @media screen and (max-width: 768px){
+    .page-login{
+        display: block;
+        margin: 30px auto;
+    }
     .ant-layout-content{
         background-color:rgb(242, 243, 241) !important;
     }
-    .text-introduce{
+    .text-introduce p{
         display: none;
+    }
+    .form-login{
+        margin: 30px auto;
     }
 }
 @media screen and (max-width: 576px){
     .form-login{
         width: 320px;
+    }
+}
+@media screen and (max-width: 375px){
+    .page-login{
+        width: 100%;
+    }
+    .text-introduce img{
+        width: 250px;
+    }
+    .form-login{
+        width: 300px;
     }
 }

@@ -9,7 +9,7 @@ import {
 import "./Login.css"
 import axios from 'axios';
 import { useHistory } from 'react-router-dom';
-
+import logoLogin from "../../vendor/img/logologin.png"
 function Login(props) {
     let history = useHistory()
     let [visibleModalSignUp, setVisibleModalSignUp] = useState(false)
@@ -84,7 +84,7 @@ function Login(props) {
             {modalSignUp}
             <div className="page-login">
                 <div className="text-introduce">
-                    <h1 style={{ color: "blue", fontSize: "40px" }}>NODEJS</h1>
+                    <img src={logoLogin} alt=""/>
                     <p style={{ fontSize: "18px" }}>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Aliquam at dicta error esse optio earum eaque voluptate officia, unde, quod velit repudiandae cum.</p>
                 </div>
                 <div>
@@ -100,7 +100,7 @@ function Login(props) {
                             ]}
                         >
                             
-                                <Input prefix={<MailOutlined style={{ fontSize: "25px" }} />} placeholder="Nhập email" onChange={(e) => {
+                                <Input prefix={<MailOutlined style={{ fontSize: "25px" ,paddingRight: '7px'}} />} style={{fontSize: '50px', }} placeholder="Nhập email" onChange={(e) => {
                                     setEmail(e.target.value)
                                 }} />
                         </Form.Item>
@@ -115,7 +115,7 @@ function Login(props) {
                                 },
                             ]}
                         >
-                                <Input.Password prefix={<LockOutlined style={{ fontSize: "25px" }} />} placeholder="Nhập password" type="password" onChange={(e) => {
+                                <Input.Password prefix={<LockOutlined style={{ fontSize: "25px", paddingRight: '7px' }} />} placeholder="Nhập password" type="password" onChange={(e) => {
                                     setPassword(e.target.value)
                                 }} />
                             <p></p>

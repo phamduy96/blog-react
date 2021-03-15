@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
-import { Layout, Menu, Drawer, Row, Col, Avatar } from 'antd';
-import { MenuOutlined, LogoutOutlined, UploadOutlined, UserOutlined} from '@ant-design/icons';
+import { Layout, Drawer, Row, Col, Avatar , BackTop} from 'antd';
+import { MenuOutlined, LogoutOutlined, UploadOutlined, UserOutlined, ArrowUpOutlined} from '@ant-design/icons';
 import 'antd/dist/antd.css';
-import "../BaseLayout/BaseLayout.css"
-import logoHeader from "../../vendor/img/logo2Baselayout.png"
+import "../BaseLayout/BaseLayout1.css"
 import axios from 'axios';
 import { useHistory } from "react-router-dom"
 import Cookies from "js-cookie"
@@ -79,20 +78,9 @@ function BaseLayout(props) {
     <Layout onClick={()=>{
       if(showBaseLayoutSelect){
         setShowBaseLayoutSelect("")
-      }
-    }} className="layout">
+      }}} className="layout">
       <Header className="header">
         {drawer}
-        <span onClick={homepage} style={{cursor: 'pointer'}}><img className="logo-header" src={'https://s1.vnecdn.net/vnexpress/restruct/i/v376/v2_2019/pc/graphics/logo.svg'} alt="" /></span>
-        <span className="baselayout-time"> {day_name } : {new Date(Date.now()).toLocaleDateString()}</span>
-        <Menu theme="dark" mode="horizontal" defaultSelectedKeys={['2']} className="baselayout-header">
-          <Menu.Item key="1">Mới nhất</Menu.Item>
-          <Menu.Item key="2">International</Menu.Item>
-        </Menu>
-        <span onClick={showDrawer} className="baselayout-header-response"><MenuOutlined /></span>
-        { user.avatar ? user.avatar.length === 1 ? <Avatar className="baselayout-header-select" onClick={showSelect}>{user.avatar.toUpperCase()}</Avatar> : 
-          <Avatar className="baselayout-header-select" src={`${user.avatar}`} onClick={showSelect}></Avatar> : <Avatar className="baselayout-header-select" icon={<UserOutlined></UserOutlined>} onClick={showSelect}></Avatar>
-        }
         <div style={showBaseLayoutSelect ? showBaseLayoutSelect : {}} className="baselayout-select">
               <p onClick={()=>{
                 axios({
@@ -108,8 +96,15 @@ function BaseLayout(props) {
                 history.push("/updateAvatar")
               }}><span><Avatar  icon={<UploadOutlined></UploadOutlined>}></Avatar></span>Thông tin cá nhân</p>
             </div>
+        <span onClick={homepage} style={{cursor: 'pointer'}}><img className="logo-header" src={'https://s1.vnecdn.net/vnexpress/restruct/i/v376/v2_2019/pc/graphics/logo.svg'} alt="" /></span>
+        <span className="baselayout-time"> {day_name } : {new Date(Date.now()).toLocaleDateString()}</span>
+       
+        <span onClick={showDrawer} className="baselayout-header-response"><MenuOutlined /></span>
+        { user.avatar ? user.avatar.length === 1 ? <Avatar className="baselayout-header-select" onClick={showSelect}>{user.avatar.toUpperCase()}</Avatar> : 
+          <Avatar className="baselayout-header-select" src={`${user.avatar}`} onClick={showSelect}></Avatar> : <Avatar className="baselayout-header-select" icon={<UserOutlined></UserOutlined>} onClick={showSelect}></Avatar>
+        }
       </Header>
-      <Content className="site-layout-background ant-layout-content">
+      <Content className="site-layout-background ant-layout-content" style={{paddingBottom: '40px'}}>
         <Row justify="center content">
           <Col xs={props.xs ? props.xs : 23} sm={props.sm ? props.sm : 23}    
             style={{ padding: "0 0" }}>
@@ -121,7 +116,10 @@ function BaseLayout(props) {
           </Col>
         </Row>
       </Content>
-      <Footer style={{ textAlign: 'center' }}>Ant Design ©2018 Created by Ant UED</Footer>
+      <BackTop>
+            <ArrowUpOutlined className="backTop" />
+        </BackTop>
+      <Footer style={{ textAlign: 'center'}}>Ant Design ©2018 Created by Ant UED</Footer>
     </Layout>
   );
 }

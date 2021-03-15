@@ -5,7 +5,7 @@ import "./Blog.css"
 import axios from "../../config/axios/axios"
 import { useHistory } from 'react-router-dom';
 import BaseLayout1 from "../../components/BaseLayout/BaseLayout1";
-function Blog(){
+function BlogSelect(props){
     const contentStyle = {
         height: '160px',
         color: '#fff',
@@ -17,10 +17,11 @@ function Blog(){
     let [overView, setOverView] = useState(false)
     let [dataBlog, setDataBlog] = useState("")
     let [worldBlog, setWorldBlog] = useState("")
+    let category = window.location.href.split('http://localhost:3000/blogs/')[1];
     useEffect(() => {
         axios({
             method: "GET",
-            url: `/blog/news`
+            url: `/blog/${category}`
         })
             .then((res) => {
                 setDataBlog(res.data.data)
@@ -41,6 +42,10 @@ function Blog(){
                 alert(err.response.data.message)
             })
     }, [])
+    var WorldBlosShuffle = null;
+    if(worldBlog){
+        WorldBlosShuffle = shuffle(worldBlog)
+    }
     function shuffle(array) {
         var currentIndex = array.length;
         while (0 !== currentIndex) {
@@ -63,27 +68,20 @@ function Blog(){
         ListBlosShuffle = shuffle(dataBlog)
         listBlogSmall = ListBlosShuffle.slice(1, dataBlog.length)
     }
-    var WorldBlosShuffle = null;
-    if(worldBlog){
-        WorldBlosShuffle = shuffle(worldBlog)
-    }
     const hotNews = () => {
         let ContentHotNews =[]
         if(dataBlog.length <= 6){
             for( var i = dataBlog.length - 1; i >= 0 ; i--){
-                ContentHotNews.push(<p onClick={()=>{
-                    history.push(`/detailBlog/${dataBlog[i]._id}`)
-                }} > <span  style={{fontSize: '18px', fontWeight: 'bolder'}}> - </span> {dataBlog[i].title}</p>)
+                ContentHotNews.push(<p > <span  style={{fontSize: '18px', fontWeight: 'bolder'}}> - </span> {dataBlog[i].title}</p>)
             }
         }else{
             for( var i = dataBlog.length - 1; i >= dataBlog.length - 5 ; i--){
-                ContentHotNews.push(<p onClick={()=>{
-                    history.push(`/detailBlog/${dataBlog[i]._id}`)
-                }}> <span  style={{fontSize: '18px', fontWeight: 'bolder'}}> - </span> {dataBlog[i].title}</p>)
+                ContentHotNews.push(<p > <span  style={{fontSize: '18px', fontWeight: 'bolder'}}> - </span> {dataBlog[i].title}</p>)
             }
         }
         return ContentHotNews
     }
+
     return(
         <BaseLayout1>
             <div className='container'style={{paddingTop: '10px'}}>
@@ -114,15 +112,15 @@ function Blog(){
                 
                 
                 </div>
-                <div className='Category' style={{padding: '10px', marginTop: '5px'}}>
+                <div className='Category' style={{padding: '10px', marginTop: '15px'}}>
                                 <h3 style={{fontSize: '20px' ,fontWeight: 'bolder', color:'#f69631', }}> THỂ LOẠI </h3>
                                 <Row>
-                                <Button onClick={()=>{history.push("/blogs/news")}} type="primary" style={{marginLeft: '5px', marginTop: '3px'}}> Thời sự </Button>
-                                <Button onClick={()=>{history.push("/blogs/life")}} type="primary" style={{marginLeft: '5px', marginTop: '3px'}}> Đời sống </Button>
-                                <Button onClick={()=>{history.push("/blog/heath")}} type="primary" style={{marginLeft: '5px', marginTop: '3px'}}> Sức khỏe </Button>
+                                <Button onClick={()=>{history.push("/blogs/news"); setOverView(!overView)}} type="primary" style={{marginLeft: '5px', marginTop: '3px'}}> Thời sự </Button>
+                                <Button onClick={()=>{history.push("/blogs/life"); setOverView(!overView)}} type="primary" style={{marginLeft: '5px', marginTop: '3px'}}> Đời sống </Button>
+                                <Button onClick={()=>{history.push("/blogs/heath"); setOverView(!overView)}} type="primary" style={{marginLeft: '5px', marginTop: '3px'}}> Sức khỏe </Button>
                                 <Button type="primary" style={{marginLeft: '5px',marginTop: '3px'}}> Bóng đá </Button>
-                                <Button onClick={()=>{history.push("/blogs/education")}} type="primary" style={{marginLeft: '5px',marginTop: '3px'}}> Giáo dục </Button>
-                                <Button onClick={()=>{history.push("/blogs/technology")}} type="primary" style={{marginLeft: '5px', marginTop: '3px'}}> Khoa học </Button>
+                                <Button onClick={()=>{history.push("/blogs/education"); setOverView(!overView)}} type="primary" style={{marginLeft: '5px',marginTop: '3px'}}> Giáo dục </Button>
+                                <Button onClick={()=>{history.push("/blogs/technology"); setOverView(!overView)}} type="primary" style={{marginLeft: '5px', marginTop: '3px'}}> Khoa học </Button>
                                 </Row>
                            </div>
                 <Row>
@@ -191,4 +189,4 @@ function Blog(){
     )
 }
 
-export default Blog
+export default BlogSelect

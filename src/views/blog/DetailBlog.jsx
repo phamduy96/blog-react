@@ -1,10 +1,14 @@
-import { ArrowUpOutlined, createFromIconfontCN, LeftCircleOutlined } from '@ant-design/icons';
-import { Affix, Avatar, BackTop, Col, Image, Input, Row } from 'antd';
 import React, { useEffect, useState } from 'react';
+import BaseLayout from "../../components/BaseLayout/BaseLayout1";
+import axios from "../../config/axios/axios"
+import "../blog/DetailBlog.css"
+import { Col, Row, Image, Input, BackTop, Affix, Avatar } from 'antd';
+import {
+    createFromIconfontCN, LeftCircleOutlined
+} from '@ant-design/icons';
+
 import { useHistory } from 'react-router-dom';
-import BaseLayout from "../../components/BaseLayout/BaseLayout";
-import axios from "../../config/axios/axios";
-import "../blog/DetailBlog.css";
+
 
 function DetailBlog(props) {
     let [dataBlog, setDataBlog] = useState("")
@@ -91,7 +95,7 @@ function DetailBlog(props) {
             <div style={{ paddingBottom: "20px" }}>
                 <Row>
                     <Col >
-                        <Affix offsetTop={280} onChange={affixed => console.log(affixed)}>
+                        <Affix offsetTop={240} onChange={affixed => console.log(affixed)}>
                             <div className="icon-fix">
                                 <div>  <LeftCircleOutlined onClick={() => {
                                     history.push("/blog")
@@ -101,12 +105,12 @@ function DetailBlog(props) {
                             </div>
 
                         </Affix >
-                        {<div style={{ background: "#fcfaf6" }}>
+                        {<div>
                             <div className="container" style={{ padding: "0 25px", marginBottom: "40px" }}>
                                 <h1 style={{ paddingBottom: "20px", marginBottom: "30px", fontSize: "25px" }}> {dataBlog.title}  </h1>
                                 <div style={{ textAlign: "center", paddingBottom: "20px" }}>
-                                    <Image style={{ width: "500px", height: '300px' }}
-                                        src={dataBlog.image}
+                                    <Image style={{ width: "100%" }}
+                                        src={dataBlog.imagedetail}
                                     >
                                     </Image>
                                     <p style={{ textAlign: "center", marginTop: "15px" }}>{dataBlog.introduceImg}</p>
@@ -162,10 +166,6 @@ function DetailBlog(props) {
                             </div>
 
                         </div>
-
-                        <BackTop>
-                            <ArrowUpOutlined className="backTop" />
-                        </BackTop>
                     </Col>
 
                 </Row>

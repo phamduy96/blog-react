@@ -1,294 +1,59 @@
 *{
-    box-sizing: border-box;
-    padding: 0;
     margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
-.blog-content{
+.list-content{
     width: 100%;
-    position: relative;
+    background-color: white;
 }
-.blog-siderbar{
-    width: 248px;
-    height: 100vh;
-    position: fixed;
-    overflow: scroll;
-    overflow-y: hidden;
-    overflow-x: hidden;
-    top: 0px;
-    left: 20px;
-    background-color: rgb(238, 238, 238);
-}
-.blog-siderbar:hover{
-    overflow-y: visible;
-    overflow-x: scroll;
-    scroll-behavior: smooth;
-}
-.blog-siderbar ul{
-    margin-top: 100px;
-    padding-bottom: 15px;
-    list-style: none;
-}
-.blog-siderbar ul li{
-    height: 40px;
-    line-height: 35px;
-    padding-left: 10px;
-    font-size: larger;
-}
-.blog-siderbar ul li:hover{
-    cursor: pointer;
-    color: rgb(23, 129, 228);
-    background-color: rgb(236, 236, 236);
-    box-shadow: 1px 1px 5px 0px #5c5eeb;
-    border-radius: 6px;
-}
-
-/* hết phần siderbar */
-
-.blog-lists{
-    margin: 50px 0px 60px 300px;
-}
-.blog-menusiderbar{
-    display: none;
-    font-size: 35px;
-    position: -webkit-sticky;
-    position: sticky;
-    top: 150px;
-    margin-left: -45px;
-    color: rgb(102, 228, 233);
-    background-color: rgb(158, 158, 158);
-    border-radius: 20px;
-}
-.blog-menusiderbar:hover{
-    color: rgb(87, 87, 99);
-    background-color: #fff;
-    cursor: pointer;
-    scale: 1.2;
-}
-.blog-prominences{
-    width: 100%;
-    display: flex;
-    margin-bottom: 70px;
-    position: relative;
-}
-.blog-prominences .tooltiptext {
-    visibility: hidden;
-    width: 120px;
-    color: rgb(224, 112, 59);
-    text-align: center;
-    font-size: 16px;
-    padding: 5px 0;
-    position: absolute;
-    z-index: 1;
-    top: -5px;
-    left: 72%;
-}
-
-.blog-prominences .tooltiptext::after {
-    content: "";
-    position: absolute;
-    top: 100%;
-    left: 50%;
-    margin-left: -5px;
-    border: 5px solid;
-    border-color: rgb(224, 112, 59) transparent transparent transparent;
-    }
-  
-.blog-prominences:hover .tooltiptext {
-    visibility: visible;
-}
-
-
-.blog-prominences-image{
-    width: 550px;
-    height: auto;
-}
-.blog-prominences-title{
-    width: 45%;
-    padding: 30px;
-    font-size: 20px;
-    background-color: rgb(234, 235, 233);
-}
-.blog-prominences-title h4{
-    font-size: 25px;
-    height: 80px;
+.text-title h3{
     overflow: hidden;
-}
-.blog-prominences-title h4:hover{
-    cursor: pointer;
-    color: rgb(22, 22, 236);
-}
-.blog-prominences-title p{
-    margin-top: 20px;
-    height: 130px;
-    overflow: hidden;
-}
-
-.lists-blog h4{
-    height: 40px;
-    overflow: hidden;
-    font-size: 20px;
-}
-.lists-blog h4:hover{
-    cursor: pointer;
-    color: rgb(22, 22, 236);
-}
-.blog-child{
-    width: 100%;
-    display: flex;
-    margin-bottom: 30px;
-}
-.blog-child-image{
-    width: 250px;
-    height: auto;
-}
-.blog-child-title{
-    width: 75%;
     font-size: 18px;
-    background-color: rgb(234, 235, 233);
 }
-.blog-child-title p{
-    height: 130px;
-    padding: 10px;
+.text-title h3:hover{
+    cursor: pointer;
+    color:#f69631;
+}
+.hot-news p{
     overflow: hidden;
+    font-size: 16px;
+
+}
+.hot-news p:hover{
+    cursor: pointer;
+    color:#f69631;
+}
+.list-content p{
+    height: 105px;
+    overflow: hidden;
+    font-size: 16px !important;
+}
+.container{
+    width: 75%;
+    margin: 0 auto;
+    background: #fff;
+}
+.infor{
+    position: relative;
+    bottom: 100px;
+    padding: 10px;
 }
 
-/* responsive */
-
-@media screen and (max-width: 1024px){
-    .blog-siderbar{
-        width: 220px;
+@media screen and (max-width: 576px){
+    .container{
+        width: 100% !important;
+        margin: 0 auto;
     }
-    .blog-lists{
-        margin: 50px 0px 60px 250px;
-    }
-    .blog-prominences-image{
-        width: 420px;
-    }
-    .blog-prominences-title{
-        width: 45%;
-        padding: 20px;
-        font-size: 19px;
-    }
-    .blog-prominences-title h4{
-        font-size: 22px;
-        height: 65px;
-    }
-    .blog-prominences-title p{
-        margin-top: 20px;
-        height: 120px;
-        overflow: hidden;
+}
+@media screen and (max-width: 1016px){
+    .container{
+        width: 90% !important;
+        margin: 0 auto;
     }
 }
 @media screen and (max-width: 768px){
-    .blog-siderbar{
-        width: 210px;
-    }
-    .blog-lists{
-        margin: 50px 0px 60px 240px;
-    }
-    .blog-prominences{
-        margin-bottom: 40px;
-    }
-    .blog-prominences-image{
-        width: 320px;
-    }
-    .blog-prominences-title{
-        width: 34%;
-        padding: 30px 10px 0px 15px;
-    }
-    .blog-prominences-title h4{
-        font-size: 18px;
-        height: 120px;
-    }
-    .blog-prominences-title p{
-        display: none;
-    }
-    .blog-child-image{
-        width: 210px;
-    }
-    .blog-child-title{
-        width: 56%;
-        font-size: 17px;
-    }
-    .blog-child-title p{
-        height: 110px;
-        padding: 10px;
-        overflow: hidden;
-    }
-}
-@media screen and (max-width: 576px){
-    .blog-menusiderbar{
-        display: inline-block;
-        z-index: 5;
-    }
-    .blog-siderbar{
-        transform: translateX(-110%);
-    }
-    .blog-lists{
-        margin: 30px 0px 60px 50px;
-    }
-    .blog-prominences-image{
-        width: 320px;
-        height: auto;
-    }
-    .blog-prominences-title{
-        width: 34%;
-        padding: 30px 10px 0px 15px;
-    }
-    .blog-prominences-title h4{
-        font-size: 18px;
-        height: 120px;
-    }
-    .blog-prominences-title p{
-        display: none;
-    }
-    .blog-child-image{
-        width: 210px;
-    }
-    .blog-child-title{
-        width: 56%;
-        font-size: 17px;
-    }
-    .blog-child-title p{
-        height: 110px;
-        padding: 10px;
-        overflow: hidden;
-    }
-}
-@media screen and (max-width: 480px){
-    .blog-siderbar{
-        width: 220px;
-        left: 10px;
-    }
-    .blog-prominences{
-        display: block;
-    }
-    .blog-prominences-image{
-        width: 97%;
-        height: auto;
-    }
-    .blog-prominences-title{
-        width: 97%;
-        padding: 0;
-        text-align: center;
-    }
-    .blog-prominences-title h4{
-        font-size: 18px;
-        height: auto;
-    }
-    .lists-blog h4{
-        width: 95%;
-    }
-    .blog-child-image{
-        width: 190px;
-    }
-    .blog-child-title{
-        width: 50%;
-        font-size: 17px;
-    }
-    .blog-child-title p{
-        height: 110px;
-        padding: 10px;
-        overflow: hidden;
-    }
+   .banner{
+       display: none;
+   }
 }
