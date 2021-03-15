@@ -179,7 +179,10 @@ function BlogSelect(props){
                                 })}
                             </div>
                         </div> : null}
-                        <img className='banner' style={{width:'100%', paddingTop: '10px'}} src="https://news.mogi.vn/wp-content/uploads/2020/09/bannerbatdongsan041.jpg" alt=""/>
+                         <div>       
+                            <img className='banner' style={{width:'100%', paddingTop: '10px'}} src="https://news.mogi.vn/wp-content/uploads/2020/09/bannerbatdongsan041.jpg" alt=""/>
+                        </div>
+
                     </Col>
                 </Row>
             </div>

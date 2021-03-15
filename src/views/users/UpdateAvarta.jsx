@@ -7,7 +7,7 @@ import BaseLayout from "../../components/BaseLayout/BaseLayout1"
 
 function UpdateAvatar() {
   let user = JSON.parse(localStorage.getItem("user"))
-  let [avatar, setAvatar] = useState('')
+  let [avatar, setAvatar] = useState(false)
   const props = {
     name: 'file',
     action: 'http://localhost:3001/module/uploadfile',
@@ -29,7 +29,7 @@ function UpdateAvatar() {
         .then((res)=>{
           user.avatar = info.file.response;
           localStorage.setItem("user", JSON.stringify(user))
-          setAvatar()
+          setAvatar(!avatar)
           alert(res.data.message)
         }).catch((err)=>{
           alert(err.response.data.message)
