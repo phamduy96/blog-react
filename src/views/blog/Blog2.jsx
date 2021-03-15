@@ -141,7 +141,7 @@ function Blog2(){
                                 </div>
                             </div>
                         </div>
-                        <img className='banner' style={{width:'100%', paddingTop: '10px'}} src="https://news.mogi.vn/wp-content/uploads/2020/09/bannerbatdongsan041.jpg" alt=""/>
+                        <iframe className='banner' style={{width:'100%', marginTop: '30px', height: '600px', border: 'none'}} src="https://ds.polyad.net/ads/f/ford/2021/03/03/49706/300x600/dfp/pc/std/fixed/?link=https%3A%2F%2Fadclick.g.doubleclick.net%2Fpcs%2Fclick%3Fxai%3DAKAOjssX1POt0FWPD1v12IVJE-DKPcCU_g7_kqzUerF2rb3ga_NFJElpKPcRJZowMUwM03eJRYv_OXX4sm-4HtNvzZr5IAsmrEdbRRU1MFLC0w559RpMtQq38_eImSKatlWpE3Xxcirp8tdhUwjgJKK6gq-1xd_onlB4VzbVFU8PLW4amhjTklpOlrPHqhUmNqpam_r1i_18BaqWLX3KXXgdE8Li4CNr3XeGr76Fe5Kjog_nw-43nCyfInQBxQOebeito6rAckIMp_rCaFTFH0MXZnBQNDPBzkCt963k3m5XLnA9z1Z7d2VKeucWGqOLllwit-nz96N0EG_h5gEMQiDZi-ZOCJ44aRk%26sai%3DAMfl-YQrHstZkV04d2C5iY3x4N0QzpGAtNiblDpOfJaXY8YwYMCJkvInWBy2vW2bUgOCcB9e0VgsOFaEoBZAKjvErPgF2ad0AssJiGAHZhUYANcOn9-HJ_bXQz-IpeHI8lJSfLaA%26sig%3DCg0ArKJSzNLc_yh-2Cu1EAE%26urlfix%3D1%26adurl%3Dhttps%253A%252F%252Fad.doubleclick.net%252Fddm%252Ftrackclk%252FN952192.139161VNEXPRESSVN%252FB25226709.297317116%253Bdc_trk_aid%253D490127882%253Bdc_trk_cid%253D146840603%253Bdc_lat%253D%253Bdc_rdid%253D%253Btag_for_child_directed_treatment%253D%253Btfua%253D%253Bgdpr%253D%253Bgdpr_consent%253D%253Bltd%253D&otherlink=&campaign_name=EverestSport&index_brand=GB1006.3_Ford&index_industrial=G1006_Xe%20-%20ph%E1%BB%A5%20ki%E1%BB%87n%20xe" alt=""/>
                     </Col>
                 </Row>
             </div>
