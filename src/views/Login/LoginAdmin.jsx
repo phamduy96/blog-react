@@ -25,7 +25,7 @@ function LoginAdmin(props) {
                 })
                 .then( async (res)=>{
                     if(res.data.user.role = "admin"){
-                        let result = await localStorage.setItem("user", JSON.stringify(res.data.user))
+                        localStorage.setItem("user", JSON.stringify(res.data.user))
                         history.push("/user")
                         
                     }else{

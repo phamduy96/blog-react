@@ -6,13 +6,6 @@ import axios from "../../config/axios/axios"
 import { useHistory } from 'react-router-dom';
 import BaseLayout1 from "../../components/BaseLayout/BaseLayout1";
 function BlogSelect(props) {
-    const contentStyle = {
-        height: '160px',
-        color: '#fff',
-        lineHeight: '160px',
-        textAlign: 'center',
-        background: '#364d79',
-    };
     let history = useHistory()
     let [overView, setOverView] = useState(false)
     let [dataBlog, setDataBlog] = useState("")
@@ -27,7 +20,7 @@ function BlogSelect(props) {
                 setDataBlog(res.data.data)
             })
             .catch((err) => {
-                alert(err.response.data.message)
+                alert(err)
             })
     }, [overView])
     useEffect(() => {
@@ -66,16 +59,18 @@ function BlogSelect(props) {
 
     const hotNews = () => {
         let ContentHotNews = []
-        if (dataBlog.length <= 5) {
+        if (dataBlog.length <= 5 && dataBlog.length >= 1) {
             for (var i = dataBlog.length - 1; i >= 0; i--) {
+                let id = dataBlog[i]._id
                 ContentHotNews.push(<p onClick={() => {
-                    history.push(`/detailBlog/${dataBlog[i]._id}`)
+                    history.push(`/detailBlog/${id}`)
                 }} > <span style={{ fontSize: '18px', fontWeight: 'bolder' }}> - </span> {dataBlog[i].title}</p>)
             }
         } else if(dataBlog.length >= 6) {
             for (var i = dataBlog.length - 1; i >= dataBlog.length - 5; i--) {
+                let id = dataBlog[i]._id
                 ContentHotNews.push(<p onClick={() => {
-                    history.push(`/detailBlog/${dataBlog[i]._id}`)
+                    history.push(`/detailBlog/${id}`)
                 }}> <span style={{ fontSize: '18px', fontWeight: 'bolder' }}> - </span> {dataBlog[i].title}</p>)
             }
         }

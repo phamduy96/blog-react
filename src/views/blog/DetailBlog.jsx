@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import BaseLayout from "../../components/BaseLayout/BaseLayout1";
 import axios from "../../config/axios/axios"
 import "../blog/DetailBlog.css"
-import { Col, Row, Image, Input, BackTop, Affix, Avatar , Button} from 'antd';
+import { Col, Row, Image, Input, Affix, Avatar , Button} from 'antd';
 import {
     createFromIconfontCN, LeftCircleOutlined
 } from '@ant-design/icons';

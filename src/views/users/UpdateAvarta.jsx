@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { Upload, message, Button, Avatar , Row, Col,Modal, } from 'antd';
-import { UploadOutlined,CameraFilled } from '@ant-design/icons';
+import { Upload, message, Avatar , Row, Col} from 'antd';
+import { CameraFilled } from '@ant-design/icons';
 import axios from 'axios';
 import './UpdateAvarta.css'
 import BaseLayout from "../../components/BaseLayout/BaseLayout1"
