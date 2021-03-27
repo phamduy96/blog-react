@@ -52,24 +52,19 @@ function BaseLayout(props) {
     switch (day) {
       case 0:
         return  day_name = "Chủ nhật";
-          break;
       case 1:
         return  day_name = "Thứ hai";
-          break;
       case 2:
         return  day_name = "Thứ ba";
-          break;
       case 3:
         return  day_name = "Thứ tư";
-          break;
       case 4:
         return  day_name = "Thứ năm";
-          break;
       case 5:
         return  day_name = "Thứ sau";
-          break;
       case 6:
         return  day_name = "Thứ bảy";
+      default: day_name = ""
       }
   }
   getDay(day)

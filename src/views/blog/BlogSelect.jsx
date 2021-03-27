@@ -10,7 +10,12 @@ function BlogSelect(props) {
     let [overView, setOverView] = useState(false)
     let [dataBlog, setDataBlog] = useState("")
     let [worldBlog, setWorldBlog] = useState("")
-    let category = window.location.href.split('http://localhost:3000/blogs/')[1];
+    let category = null
+    if(process.env.NODE_ENV === "dev"){
+        category = window.location.href.split(`${process.env.REACT_APP_DEV}/blogs/`)[1];
+    }else{
+        category = window.location.href.split(`${process.env.REACT_APP_URL}/blogs/`)[1];
+    }
     useEffect(() => {
         axios({
             method: "GET",
@@ -20,7 +25,7 @@ function BlogSelect(props) {
                 setDataBlog(res.data.data)
             })
             .catch((err) => {
-                alert(err)
+                alert(err.response.data.message)
             })
     }, [overView])
     useEffect(() => {
@@ -67,7 +72,7 @@ function BlogSelect(props) {
                 }} > <span style={{ fontSize: '18px', fontWeight: 'bolder' }}> - </span> {dataBlog[i].title}</p>)
             }
         } else if(dataBlog.length >= 6) {
-            for (var i = dataBlog.length - 1; i >= dataBlog.length - 5; i--) {
+            for (let i = dataBlog.length - 1; i >= dataBlog.length - 5; i--) {
                 let id = dataBlog[i]._id
                 ContentHotNews.push(<p onClick={() => {
                     history.push(`/detailBlog/${id}`)

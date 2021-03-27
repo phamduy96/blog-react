@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from "../../config/axios/axios";
-import BaseLayout from "../../components/BaseLayout/BaseLayout"
+import BaseLayout from "../../components/BaseLayout/BaseLayout1"
 import "./Users.css"
 import { Table, Space, Avatar, Image, Popconfirm, message, Button, Modal} from 'antd';
 import { SearchOutlined } from '@ant-design/icons';

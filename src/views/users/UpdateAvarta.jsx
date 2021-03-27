@@ -8,9 +8,15 @@ import BaseLayout from "../../components/BaseLayout/BaseLayout1"
 function UpdateAvatar() {
   let user = JSON.parse(localStorage.getItem("user"))
   let [avatar, setAvatar] = useState(false)
+  var action = null
+  if(process.env.NODE_ENV === "dev"){
+    action = process.env.REACT_APP_DEV
+  }else{
+    action = process.env.REACT_APP_URL
+  }
   const props = {
     name: 'file',
-    action: 'http://localhost:3001/module/uploadfile',
+    action: `${action}/module/uploadfile`,
     headers: {
       authorization: 'authorization-text',
     },

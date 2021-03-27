@@ -7,7 +7,6 @@ import { useHistory } from 'react-router-dom';
 import BaseLayout1 from "../../components/BaseLayout/BaseLayout1";
 function Blog() {
     let history = useHistory()
-    let [overView, setOverView] = useState(false)
     let [dataBlog, setDataBlog] = useState("")
     let [worldBlog, setWorldBlog] = useState("")
     useEffect(() => {
@@ -21,7 +20,7 @@ function Blog() {
             .catch((err) => {
                 alert(err.response.data.message)
             })
-    }, [overView])
+    }, [])
     useEffect(() => {
         axios({
             method: "GET",
@@ -61,7 +60,7 @@ function Blog() {
                 }} > <span style={{ fontSize: '18px', fontWeight: 'bolder' }}> - </span> {dataBlog[i].title}</p>)
             }
         } else if(dataBlog.length >= 6) {
-            for (var i = dataBlog.length - 1; i >= dataBlog.length - 5; i--) {
+            for (let i = dataBlog.length - 1; i >= dataBlog.length - 5; i--) {
                 let id = dataBlog[i]._id
                 ContentHotNews.push(<p onClick={() => {
                     history.push(`/detailBlog/${id}`)

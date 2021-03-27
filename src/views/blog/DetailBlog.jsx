@@ -12,7 +12,6 @@ import { useHistory } from 'react-router-dom';
 
 function DetailBlog(props) {
     let [dataBlog, setDataBlog] = useState("")
-    let idBlog = window.location.href.split('http://localhost:3000/detailBlog/')[1];
     let [contentComment, setContentComment] = useState("")
     let history = useHistory()
     let user = JSON.parse(localStorage.getItem('user'));
@@ -22,6 +21,12 @@ function DetailBlog(props) {
     const IconFont = createFromIconfontCN({
         scriptUrl: '//at.alicdn.com/t/font_8d5l8fzk5b87iudi.js',
     });
+    let idBlog = null
+    if(process.env.NODE_ENV === "dev"){
+        idBlog = window.location.href.split(`${process.env.REACT_APP_DEV}/detailBlog/`)[1];
+    }else{
+        idBlog = window.location.href.split(`${process.env.REACT_APP_URL}/detailBlog/`)[1];
+    }
     useEffect(() => {
         axios({
             method: 'GET',
@@ -32,11 +37,6 @@ function DetailBlog(props) {
             console.log(err)
         })
     }, [overview])
-
-    useEffect(() => {
-        const contentCommnet = document.getElementById("commentID");
-        console.log(contentCommnet);
-    }, [contentComment])
 
     function getTimeComment(timeCreateAt) {
         let years = Math.floor((Date.now() - timeCreateAt) / (259200 * 3600000));
@@ -58,7 +58,7 @@ function DetailBlog(props) {
                     setComments(res.data.data[0].idComment)
                 })
                 .catch((err) => {
-                    console.dir(err)
+                    alert(err.response.data.message)
                 })
         }
     }, [dataBlog])
